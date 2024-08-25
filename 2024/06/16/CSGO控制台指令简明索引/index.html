@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN,en,zh-HK,zh-TW,default">
     <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/#5.8.0'>
   <meta name="generator" content="Hexo 7.3.0">
   <meta name="Volantis" content="5.8.0">
@@ -28,8 +28,8 @@
   <!-- front-matter head_begin begin -->
   <!-- front-matter head_begin end -->
   <link rel="preload" href="/css/style.css" as="style">
-  <link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-<link rel="preload" href="https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="//at.alicdn.com/wf/webfont/xJBL0QX2dz1o/SvedHhdKT4e6.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="//at.alicdn.com/wf/webfont/xJBL0QX2dz1o/SvedHhdKT4e6.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
   <!-- feed -->
   <!-- 页面元数据 -->
@@ -47,7 +47,7 @@
 <meta property="article:published_time" content="2024-06-16T04:05:07.616Z">
 <meta property="article:modified_time" content="2024-08-22T09:08:05.133Z">
 <meta property="article:author" content="CLY">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
     /* 首屏样式 */
@@ -58,9 +58,9 @@
   --color-site-body: #f4f4f4;
   --color-site-bg: #f4f4f4;
   --color-site-inner: #fff;
-  --color-site-footer: #666;
+  --color-site-footer: #596164;
   --color-card: #fff;
-  --color-text: #444;
+  --color-text: #596164;
   --color-block: #f6f6f6;
   --color-inlinecode: #c74f00;
   --color-codeblock: #fff7ea;
@@ -106,8 +106,8 @@ html {
   color: var(--color-text);
   width: 100%;
   height: 100%;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
-  font-size: 16px;
+  font-family: UbuntuMono, 阿里妈妈方圆体 VF Regular, Menlo, Monaco, monospace, sans-serif;
+  font-size: 18px;
 }
 html >::-webkit-scrollbar {
   height: 4px;
@@ -193,7 +193,7 @@ hr {
   border: 0;
   border-radius: 1px;
   -webkit-border-radius: 1px;
-  border-bottom: 1px solid rgba(68,68,68,0.1);
+  border-bottom: 1px solid rgba(89,97,100,0.1);
 }
 button,
 input {
@@ -517,13 +517,13 @@ button {
   margin-top: 32px;
 }
 .cover-wrapper .cover-body .title {
-  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-family: 阿里妈妈方圆体 VF Regular, Helvetica, monospace;
   font-size: 3.125rem;
   line-height: 1.2;
   text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 .cover-wrapper .cover-body .subtitle {
-  font-size: 20px;
+  font-size: 22.5px;
 }
 .cover-wrapper .cover-body .logo {
   max-height: 120px;
@@ -626,8 +626,8 @@ button {
   -o-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   align-items: stretch;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -718,8 +718,8 @@ button {
 .cover-wrapper.dock .menu,
 .cover-wrapper.featured .menu,
 .cover-wrapper.focus .menu {
-  border-radius: 6px;
-  -webkit-border-radius: 6px;
+  border-radius: 7px;
+  -webkit-border-radius: 7px;
 }
 .cover-wrapper.dock .menu .list-h a,
 .cover-wrapper.featured .menu .list-h a,
@@ -734,12 +734,12 @@ button {
   align-items: center;
   padding: 12px;
   line-height: 24px;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
   border-bottom: none;
   text-align: center;
   align-content: flex-end;
-  color: rgba(68,68,68,0.7);
+  color: rgba(89,97,100,0.7);
   font-size: 1.5rem;
 }
 @media screen and (max-width: 500px) {
@@ -832,15 +832,15 @@ button {
   }
 }
 @font-face {
-  font-family: 'UbuntuMono';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf");
+  font-family: '阿里妈妈方圆体 VF Regular';
+  src: url("//at.alicdn.com/wf/webfont/xJBL0QX2dz1o/SvedHhdKT4e6.woff2");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
 }
 @font-face {
-  font-family: 'Varela Round';
-  src: url("https://unpkg.com/volantis-static@0.0.1654736714924/media/fonts/VarelaRound/VarelaRound-Regular.ttf");
+  font-family: '阿里妈妈方圆体 VF Regular';
+  src: url("//at.alicdn.com/wf/webfont/xJBL0QX2dz1o/SvedHhdKT4e6.woff2");
   font-weight: 'normal';
   font-style: 'normal';
   font-display: swap;
@@ -963,7 +963,7 @@ button {
   line-height: 64px;
   padding: 0 24px;
   font-size: 1.25rem;
-  font-family: "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Helvetica, monospace;
+  font-family: 阿里妈妈方圆体 VF Regular, Helvetica, monospace;
 }
 .l_header #wrapper .nav-main .title img {
   height: 64px;
@@ -974,7 +974,7 @@ button {
 }
 .l_header .nav-sub .title {
   font-weight: bold;
-  font-family: UbuntuMono, "Varela Round", "PingFang SC", "Microsoft YaHei", Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+  font-family: UbuntuMono, 阿里妈妈方圆体 VF Regular, Menlo, Monaco, monospace, sans-serif;
   line-height: 1.2;
   max-height: 64px;
   white-space: normal;
@@ -1164,8 +1164,8 @@ button {
   -moz-box-sizing: border-box;
   padding-left: 40px;
   font-size: 0.875rem;
-  border-radius: 8px;
-  -webkit-border-radius: 8px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
   border: none;
   transition: all 0.28s ease;
   -webkit-transition: all 0.28s ease;
@@ -1251,8 +1251,8 @@ ul.nav-list-h>li {
   -ms-justify-content: center;
   height: 100%;
   line-height: 2.4;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 ul.nav-list-h>li >a {
   -webkit-font-smoothing: antialiased;
@@ -1268,9 +1268,9 @@ ul.list-v {
   background: var(--color-card);
   box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
   -webkit-box-shadow: 0 2px 4px 0px rgba(0,0,0,0.08), 0 4px 8px 0px rgba(0,0,0,0.08), 0 8px 16px 0px rgba(0,0,0,0.08);
-  margin-top: -6px;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
+  margin-top: -7px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
   padding: 8px 0;
 }
 ul.list-v.show {
@@ -1596,8 +1596,8 @@ ul.list-v >li>a:hover {
 .l_header {
   max-width: 65vw;
   left: calc((100% - 65vw) * 0.5);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 @media screen and (max-width: 2048px) {
   .l_header {
@@ -1744,7 +1744,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1724342305199),
+    lastupdate: new Date(1724591189744),
     sidebar: {
       for_page: ["blogger","category","tagcloud","donate"],
       for_post: ["toc"],
@@ -2177,7 +2177,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <!-- Custom Files bodyBegin end-->
     <!-- front-matter body_begin begin -->
     <!-- front-matter body_begin end -->
-    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur show" style='opacity: 0' >
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -2194,9 +2194,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
         <a class="title flat-box" target="_self" href='/'>
           
-            <img no-lazy class='logo' src='https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/Logo-NavBar@3x.png'/>
+          
+            <i class='/img/KLEE.jpg'></i>
           
           
+            OYAMAMahiro
           
         </a>
       
@@ -2278,13 +2280,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
               <li>
                 <a class="menuitem flat-box faa-parent animated-hover"
-                href="/friends/" title="友链"
+                href="/friends/" title="游戏"
                   
                   
                   
                     active-action="action-friends"
                   >
-                  <i class='fa-solid fa-link fa-fw'></i>友链
+                  <i class='fa-solid fa-link fa-fw'></i>游戏
                 </a>
                 
               </li>
@@ -2399,13 +2401,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             
               <li>
                 <a class="menuitem flat-box faa-parent animated-hover"
-                href="/friends/" title="友链"
+                href="/friends/" title="游戏"
                   
                   
                   
                     active-action="action-friends"
                   >
-                  <i class='fa-solid fa-link fa-fw'></i>友链
+                  <i class='fa-solid fa-link fa-fw'></i>游戏
                 </a>
                 
               </li>
@@ -2521,7 +2523,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper">
           
 <div id="l_main" class=''>
-  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow blur article-type-post" id="post" itemscope itemprop="blogPost">
   <link itemprop="mainEntityOfPage" href="https://ly-chen04.github.io/2024/06/16/CSGO控制台指令简明索引/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="OYAMAMahiro">
@@ -2576,6 +2578,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
             
 
+
+<div class="new-meta-item browse">
+  <a class='notlink'>
+    <p>
+      <i class="fa-solid fa-eye fa-fw" aria-hidden="true"></i>
+      
+      <span id="busuanzi_value_page_pv"><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span>
+      
+      <span>次浏览</span>
+    </p>
+  </a>
+</div>
 
 
           
@@ -2873,7 +2887,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
 
 
-  <article class="post white-box shadow floatable blur" id="comments">
+  <article class="post white-box shadow blur" id="comments">
     <span hidden>
       <meta itemprop="discussionUrl" content="/2024/06/16/CSGO%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%8C%87%E4%BB%A4%E7%AE%80%E6%98%8E%E7%B4%A2%E5%BC%95/index.html#comments">
     </span>
@@ -3053,7 +3067,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         本站使用
         <a href="https://github.com/volantis-x/hexo-theme-volantis/#5.8.0" target="_blank" class="codename">Volantis</a>
-        作为主题
+        作为主题，总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fa-solid fa-loader fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
       
     
       
@@ -3316,6 +3333,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
+  <script defer src="https://unpkg.com/volantis-static@0.0.1654736714924/libs/busuanzi/js/busuanzi.pure.mini.js" data-pjax></script>
+
 
 <!-- optional -->
 
@@ -3576,7 +3595,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"OYAMAMahiro","url":"https://ly-chen04.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"CLY","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://ly-chen04.github.io/","sameAs":["https://github.com/volantis-x"],"description":"2024-08-22"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://ly-chen04.github.io/","name":"OYAMAMahiro"}},{"@type":"ListItem","position":3,"item":{"@id":"https://ly-chen04.github.io/2024/06/16/CSGO控制台指令简明索引/","name":"CSGO控制台指令简明索引"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"OYAMAMahiro","url":"https://ly-chen04.github.io/","keywords":null,"description":"2024-08-22","author":{"@type":"Person","name":"CLY","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://ly-chen04.github.io/","description":"2024-08-22"},"publisher":{"@type":"Organization","name":"OYAMAMahiro","url":"https://ly-chen04.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://ly-chen04.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"CSGO控制台指令简明索引","description":"注：CSGO指令不完全适用于CS2控制台。","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"https://ly-chen04.github.io/2024/06/16/CSGO%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%8C%87%E4%BB%A4%E7%AE%80%E6%98%8E%E7%B4%A2%E5%BC%95/"},"author":{"@type":"Person","name":"CLY","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://ly-chen04.github.io/"},"publisher":{"@type":"Organization","name":"OYAMAMahiro","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://ly-chen04.github.io/2024/06/16/CSGO%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%8C%87%E4%BB%A4%E7%AE%80%E6%98%8E%E7%B4%A2%E5%BC%95/","wordCount":21,"datePublished":"2024-06-16T04:05:07.616Z","dateModified":"2024-08-22T09:08:05.133Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"OYAMAMahiro","url":"https://ly-chen04.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"CLY","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://ly-chen04.github.io/","sameAs":["https://github.com/volantis-x"],"description":"2024-08-22"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://ly-chen04.github.io/","name":"OYAMAMahiro"}},{"@type":"ListItem","position":3,"item":{"@id":"https://ly-chen04.github.io/2024/06/16/CSGO控制台指令简明索引/","name":"CSGO控制台指令简明索引"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"OYAMAMahiro","url":"https://ly-chen04.github.io/","keywords":null,"description":"2024-08-22","author":{"@type":"Person","name":"CLY","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://ly-chen04.github.io/","description":"2024-08-22"},"publisher":{"@type":"Organization","name":"OYAMAMahiro","url":"https://ly-chen04.github.io/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"https://ly-chen04.github.io?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"CSGO控制台指令简明索引","description":"注：CSGO指令不完全适用于CS2控制台。","inLanguage":["zh-CN","en","zh-HK","zh-TW","default"],"mainEntityOfPage":{"@type":"WebPage","@id":"https://ly-chen04.github.io/2024/06/16/CSGO%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%8C%87%E4%BB%A4%E7%AE%80%E6%98%8E%E7%B4%A2%E5%BC%95/"},"author":{"@type":"Person","name":"CLY","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"https://ly-chen04.github.io/"},"publisher":{"@type":"Organization","name":"OYAMAMahiro","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"https://ly-chen04.github.io/2024/06/16/CSGO%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%8C%87%E4%BB%A4%E7%AE%80%E6%98%8E%E7%B4%A2%E5%BC%95/","wordCount":21,"datePublished":"2024-06-16T04:05:07.616Z","dateModified":"2024-08-22T09:08:05.133Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
