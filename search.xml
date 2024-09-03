@@ -1,0 +1,2978 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>CS2</title>
+    <url>/2024/08/22/CS2/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>CS2 Page</title>
+    <url>/2024/06/16/CS2%20Page/</url>
+    <content><![CDATA[<h4 id="此页面正在维护。"><a href="#此页面正在维护。" class="headerlink" title="此页面正在维护。"></a>此页面正在维护。</h4><span id="more"></span>
+]]></content>
+  </entry>
+  <entry>
+    <title>Intel QSV在FFmpeg中的实现与使用~</title>
+    <url>/2024/08/22/Intel-QSV%E5%9C%A8FFmpeg%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>CSGO控制台指令简明索引</title>
+    <url>/2024/06/16/CSGO%E6%8E%A7%E5%88%B6%E5%8F%B0%E6%8C%87%E4%BB%A4%E7%AE%80%E6%98%8E%E7%B4%A2%E5%BC%95/</url>
+    <content><![CDATA[<h4 id="注：CSGO指令不完全适用于CS2控制台。"><a href="#注：CSGO指令不完全适用于CS2控制台。" class="headerlink" title="注：CSGO指令不完全适用于CS2控制台。"></a>注：CSGO指令不完全适用于CS2控制台。</h4><span id="more"></span>
+<h1 id="CSGO控制台指令简明索引"><a href="#CSGO控制台指令简明索引" class="headerlink" title="CSGO控制台指令简明索引"></a>CSGO控制台指令简明索引</h1><p>V社(Valve)的Source起源引擎制作的游戏都可以开发者控制台，简称控制台<code>console</code>，使用控制台可以实现很多游戏的设置面板无法提供的功能，比如跳投、切换准星参数、颜色等等特殊功能都是利用了控制台的指令实现的，这也是CS游戏的一大特色了。</p>
+<h2 id="开启控制台"><a href="#开启控制台" class="headerlink" title="开启控制台"></a>开启控制台</h2><p>在游戏的设置菜单里，<code>游戏设置-游戏-启用开发者控制台</code>选<strong>是</strong>即可启用控制台，之后按下<code>~</code>即可开关控制台并使用各种指令。开启控制台的指令是<code>con_enable 1</code>，看起来是个悖论，等到说CFG时就知道它的用处了。</p>
+<h2 id="多个控制台指令"><a href="#多个控制台指令" class="headerlink" title="多个控制台指令"></a>多个控制台指令</h2><p>当同时需要在控制台使用多个指令时，务必使用分号<code>;</code>分隔各个指令。</p>
+<h2 id="控制台提示"><a href="#控制台提示" class="headerlink" title="控制台提示"></a>控制台提示</h2><p>指令输入的过程中控制台会给出提示，大多数情况都会有下拉菜单提示各种指令，可以使用↑↓在下拉菜单中切换，使用Tab键也可以自动填入下拉菜单的第一个指令，比如：</p>
+<ul>
+<li>显示各种网络参数的指令<code>net_graph 1</code>，输入至<code>net_</code>时下方第一条指令就是<code>net_graph</code>，直接按下<code>Tab</code>和<code>1</code>即可快速输入这条完整的指令。</li>
+<li>退出游戏的指令<code>quit</code>，原理同上，输入<code>q</code>→<code>Tab</code>→<code>回车</code>，即可实现光速quit（真实）。</li>
+</ul>
+<p>不要小看提示，他可以很大程度上纠正拼写问题，有时使用指令&#x2F;CFG的时候可以试着手动输一遍，过程中提示消失很可能是拼写有误；同样，如果使用HLAE录制集锦，输入<code>mirv</code>发现没有提示极可能没有正确地使用HLAE启动CSGO。</p>
+<h2 id="常用控制台指令"><a href="#常用控制台指令" class="headerlink" title="常用控制台指令"></a>常用控制台指令</h2><h3 id="账号登录相关"><a href="#账号登录相关" class="headerlink" title="账号登录相关"></a>账号登录相关</h3><ul>
+<li>quit 快速退出游戏，使用心态爆炸，光速quit</li>
+<li>exit 同上，不过没有那么有名</li>
+<li>disconnect 退出服务器到主界面</li>
+<li>retry 重连最近一次加入的房间，比如从休闲、死斗退出之后还想回到刚才的房间可以使用，前提是中途没有重开游戏；5e、b5等平台也可以使用快速重连服务器（小退），重启游戏是大退。</li>
+</ul>
+<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><ul>
+<li>net_graph 1 显示网络参数：ping&#x2F;var&#x2F;choke等，0为关闭。</li>
+<li>net_graphpos 1 网络参数的水平位置：1&#x3D;右 2&#x3D;中 3&#x3D;左。</li>
+<li>fps_max 300 设置最大帧数为300，一般会根据当前的帧数表现动态调整，尽可能让FPS波动不超过60以获得较好的观感体验。</li>
+<li>volume 1 主音量大小，0为静音</li>
+<li>sensitivity 0.9 鼠标灵敏度</li>
+<li>map dust2 进入本地离线服务器并加载dust2地图，地图名不必完全一致，如荒漠迷城可以用<code>map mir</code>。</li>
+<li>mat_monitorgamma 2.2 亮度，越小越亮[1.6~2.6]</li>
+<li>mat_monitorgamma_tv_enabled “0” 显示模式[1.电视 0.电脑屏幕]</li>
+<li>buy awp 购买武器指令，即购买awp</li>
+<li>give weapon_ak47 获得ak47，常用于跑图</li>
+<li>+right 视角右移，输入-right取消</li>
+<li>+moveright 相当于按下D键，-moveright取消，和+right组成挂机防踢指令</li>
+</ul>
+<h3 id="cl-相关参数"><a href="#cl-相关参数" class="headerlink" title="cl_相关参数"></a>cl_相关参数</h3><p>cl_开头的指令往往和HUD有关，比如雷达、血条、菜单等用于提示玩家的信息。</p>
+<ul>
+<li>cl_autowepswitch 0 关闭自动换上捡起的武器：珍爱生命，远离自动换枪</li>
+<li>cl_autohelp 0 禁用游戏提示（格洛克&#x2F;法玛斯连发提示）</li>
+<li>cl_showhelp 0 禁用游戏提示</li>
+<li>cl_dm_buyrandomweapons 0 关闭死斗随机买枪，功能同F3键</li>
+<li>cl_draw_hud 0 关闭HUD，得到相对干净的画面，方便截图或者录制视频</li>
+<li>cl_draw_only_deathnotices 0 关闭大部分HUD，保留准星和击杀信息，常用于录制视频和集锦</li>
+<li>cl_drawhud_force_radar -1 强制关闭雷达，但是雷达下方的金钱数无法关闭，1开启雷达</li>
+</ul>
+<p>HUD颜色透明度、雷达参数省略，直接在设置中调整即可。</p>
+<h3 id="准星参数"><a href="#准星参数" class="headerlink" title="准星参数"></a>准星参数</h3><ul>
+<li>cl_crosshairalpha 255 透明度（0~255）</li>
+<li>cl_crosshairdot 1 准星中间的点，0关闭</li>
+<li>cl_crosshairgap 1 十字准星间距，可以&lt;0</li>
+<li>cl_crosshair_t 0 T型准星，1开启</li>
+<li>cl_crosshairsize 3 准星长度</li>
+<li>cl_crosshairthickness 1 准星厚度</li>
+<li>cl_crosshairstyle 4 准星类型[1. 2. 3. 4.经典静态 5.跑动静止开枪动态]</li>
+<li>cl_crosshair_drawoutline 0 准星黑色外轮廓粗细，0关闭</li>
+<li>cl_crosshaircolor_b “250”</li>
+<li>cl_crosshaircolor_r “0”</li>
+<li>cl_crosshaircolor_g “255” 准星的颜色RGB值</li>
+</ul>
+<p>主要是这些参数，小改动使用控制台方便，更全面的调整请在创意工坊<strong>Crashz crosshair generator</strong>中调整。</p>
+<h3 id="持枪视角参数"><a href="#持枪视角参数" class="headerlink" title="持枪视角参数"></a>持枪视角参数</h3><ul>
+<li>viewmodel_presetpos 2 持枪视角预设[1.默认 2.写实 3.经典]</li>
+<li>viewmodel_recoil 0 取消开枪枪口向上跳动，1开启时跳动幅度很大</li>
+<li>viewmodel_offset_x “1.1”</li>
+<li>viewmodel_offset_y “-1.8”</li>
+<li>viewmodel_offset_z “0.2” XYZ轴的参数</li>
+<li>viewmodel_fov “54” 视角的FOV（视野大小）</li>
+<li>cl_bobcycle “0.98” 手臂摆动幅度</li>
+</ul>
+<p>主要浏览一下这些参数，可以在创意工坊<strong>Crashz viewmodel generator</strong>中调整。</p>
+<h3 id="sv-相关参数"><a href="#sv-相关参数" class="headerlink" title="sv_相关参数"></a>sv_相关参数</h3><p>sv是server的简写，一般在主机创建房间的时候使用，跑图常用。</p>
+<ul>
+<li>sv_cheats 1 开启作弊模式，有的指令官匹会影响平衡，跑图时记得开启</li>
+<li>sv_infinite_ammo 1 无限子弹 [1.无限子弹 2.无限弹夹数 0.关闭]</li>
+<li>sv_showimpacts 1 显示弹着点，0关闭</li>
+<li>sv_showimpacts_time 15 弹着点时间，单位秒</li>
+<li>sv_grenade_trajectory 1 显示投掷物轨迹，0关闭</li>
+<li>sv_grenade_trajectory_time 15 投掷物轨迹显示时间</li>
+<li>sv_grenade_trajectory_thickness 0.5 轨迹线厚度</li>
+</ul>
+<h3 id="bot相关指令"><a href="#bot相关指令" class="headerlink" title="bot相关指令"></a>bot相关指令</h3><ul>
+<li>bot_kick 踢掉BOT</li>
+<li>bot_stop 1 BOT静止</li>
+<li>bot_crouch 1 BOT蹲下</li>
+<li>bot_add 添加BOT</li>
+<li>bot_kill 杀死BOT</li>
+<li>bot_place 放置BOT</li>
+</ul>
+<h3 id="mp-相关指令"><a href="#mp-相关指令" class="headerlink" title="mp_相关指令"></a>mp_相关指令</h3><ul>
+<li>mp_warmup_end 热身结束</li>
+<li>mp_restartgame 1 重新开始游戏</li>
+<li>mp_freezetime 1 回合开始静止1s</li>
+<li>mp_round_restart_delay 2 回合结束后等待时间2s</li>
+<li>god 无敌，gods是所有人无敌</li>
+</ul>
+<h3 id="bind指令"><a href="#bind指令" class="headerlink" title="bind指令"></a>bind指令</h3><figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">bind x &quot;...&quot;;<br></code></pre></td></tr></table></figure>
+
+<p>该指令的格式如上，x为绑定的按键名，<code>...</code>是绑定的指令，可以是一条也可以是多条指令用分号<code>;</code>分开，填入引号<code>&quot; &quot;</code>，当指令是没有间隔的单独指令时引号<code>;可以省略，其他情况不可省，如</code>+speed<code>可省略，</code>sensitivity 1&#96;和多个指令不省略。多个指令例子如下：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">bind shift &quot;+speed;r_cleardecals&quot;;<br></code></pre></td></tr></table></figure>
+
+
+<p><code>+speed</code>是静步的指令，<code>r_cleardecals</code>是清楚血迹的指令，绑定了shift键。这条指令执行之后，在按下shift键静步的同时清除血迹。</p>
+<p>bind指令还有一种用法，用来查看某个按键已经绑定的指令：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">bind x<br></code></pre></td></tr></table></figure>
+
+<p>输入之后控制台会显示已经绑定的指令，可以检查有没有正确地绑定按键。</p>
+<h3 id="unbind指令"><a href="#unbind指令" class="headerlink" title="unbind指令"></a>unbind指令</h3><p>清除已绑定的键位，比如已经绑定了x键，想要取消：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">unbind x<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">unbindall	//取消所有按键绑定<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">unbindallmousekeyboard//取消所有键鼠的绑定<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="bindtoggle和toggle指令"><a href="#bindtoggle和toggle指令" class="headerlink" title="bindtoggle和toggle指令"></a>bindtoggle和toggle指令</h3><p>有的指令比如<code>cl_drawhud 1</code>即打开HUD，修改数字得到<code>cl_drawhud 0</code>，即关闭HUD。实际这种指令往往在两个不同的值之间切换，那么使用bindtoggle和toggle就可以写出非常简单的一键切换的指令：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">bindtoggle x cl_drawhud;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">bind x &quot;toggle cl_drawhud&quot;;<br></code></pre></td></tr></table></figure>
+
+<p>这两种写法都可以实现x键切换HUD开关。</p>
+<p>但是后者<code>toggle</code>的应用更广，可以触发切换更多的指令，比如：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">bind x &quot;toggle volume&quot;;<br></code></pre></td></tr></table></figure>
+
+<p>可以写成：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">bind x &quot;toggle volume 0 1&quot;;<br></code></pre></td></tr></table></figure>
+
+
+<p>但是实际上音量不仅有0、1两种情况，可以是0&#x2F;1之间的小数，同样有的指令的值可以大于1，这时候用第二种写法就可以任意地切换。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">bind x &quot;toggle volume 1 0.5&quot;;	//一键切换音量100%/50%<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="alias指令"><a href="#alias指令" class="headerlink" title="alias指令"></a>alias指令</h3><p>bind指令可以给某个键绑定指令，而alias指令则可以自定义指令。有了alias之后，可以实现CSGO中很多特殊的功能，可以了解一下<a href="https://purple-csgo.github.io/hlae/hlae-focus.html">一键高亮击杀</a>的指令解释。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">alias func &quot;...;...&quot;;<br></code></pre></td></tr></table></figure>
+
+<p>执行这条指令之后，在<strong>关闭CSGO游戏之前</strong>，使用<code>func</code>指令就相当于执行””中所有的指令，可以直接在控制台中使用：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">func<br></code></pre></td></tr></table></figure>
+
+
+<p>也可以绑定到某个按键上，按键触发：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">bind x func;<br></code></pre></td></tr></table></figure>
+
+
+<p>一定注意alias指令是临时生效的，重启游戏就要重新输入，解决办法是写成CFG并启用自动加载。</p>
+<hr>
+<p>alias指令强大之处在于，它可以嵌套定义：</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><code class="hljs abnf">text<br>alias f f_on<span class="hljs-comment">;</span><br>alias f_on <span class="hljs-string">&quot;alias f f_off;...&quot;</span><span class="hljs-comment">;</span><br>alias f_off <span class="hljs-string">&quot;alias f f_on;...&quot;</span><span class="hljs-comment">;</span><br>bind x f<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+
+<p>这样就实现一个开关式的功能：</p>
+<ul>
+<li>一开始，按键<strong>x</strong>代表执行<code>f</code>，即<code>f_on</code>。</li>
+<li>按下按键<strong>x</strong>，实际执行<code>f_on</code>，由于也执行了<code>alias f f_of;</code>，之后执行<code>f</code>相当于执行<code>f_off</code></li>
+<li>再按下按键<strong>x</strong>，实际执行<code>f_off</code>，由于也执行了<code>alias f f_on;</code>，之后执行<code>f</code>相当于执行<code>f_on</code></li>
+<li>往复在两个档位间切换</li>
+</ul>
+<p><code>...</code>处可以放入各种指令，已经可以实现很多的功能了，下面给出跳投的指令：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><code class="hljs text">bind Capslock +jumpthrow;	// &quot;Capslock&quot;键跳投 可修改<br>alias +jumpthrow &quot;+jump;-attack&quot;;<br>alias -jumpthrow -jump;<br></code></pre></td></tr></table></figure>
+
+<p>如果理解了刚才说的内容，这段指令应该可以理解，这里补充的是：<code>+指令</code>、<code>-指令</code>代表按下&#x2F;松开按键时触发，按下Capslock键执行<code>+jump;-attack</code>，也就是跳投，松开Capslock键执行<code>-jump</code>，防止不停地跳。</p>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p><a href="https://tools.dathost.net/csgo-commands">CSGO指令搜索</a></p>
+<p><a href="https://developer.valvesoftware.com/wiki/Console_Command_List">Valve官方指令清单</a></p>
+<p><a href="https://github.com/Purple-CSGO/Cfg-Preset-By-Purp1e/blob/master/bind_default.cfg">默认键位指令</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Intel QSV在FFmpeg中的实现与使用</title>
+    <url>/2024/06/16/Intel%20QSV%E5%9C%A8FFmpeg%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h4 id="文章摘自CSDN社区。本文经修改。"><a href="#文章摘自CSDN社区。本文经修改。" class="headerlink" title="文章摘自CSDN社区。本文经修改。"></a>文章摘自CSDN社区。本文经修改。</h4><span id="more"></span>
+
+<h2 id="一、处理器整体架构"><a href="#一、处理器整体架构" class="headerlink" title="一、处理器整体架构"></a>一、处理器整体架构</h2><p><img src="/images/QSV1.jpg"><br>英特尔的图形处理GPU被称为“核芯显卡”，与CPU集成封装在同一个芯片上，上图展示的是芯片的内部结构。</p>
+<h3 id="1-1-发展"><a href="#1-1-发展" class="headerlink" title="1.1 发展"></a>1.1 发展</h3><p><img src="/images/QSV2.jpg"><br>英特尔从lvy Bridge架构开始就尝试将GPU与CPU集成在中央处理芯片中并逐代发展到Skylake架构。初期的Ivy Bridge架构中GPU所占的面积非常小，而到现在的第五代处理器架构Skylake已经实现十分成熟的GPU集成技术，GPU在芯片中所占的面积已经超过了一半。在未来将推出基于PCI-E的独立显卡，为PC带来更大的图像性能提升。</p>
+<h3 id="1-2-基础功能模块"><a href="#1-2-基础功能模块" class="headerlink" title="1.2 基础功能模块"></a>1.2 基础功能模块</h3><p><img src="/images/QSV3.jpg"><br>上图展示的是一款GPU所具备的一些基础功能模块。英特尔的核芯显卡分为普通的Intel HD Graphics与性能强大的Intel Iris (Pro)Graphics，其中硬件结构的变化决定性能的高低。GPU中的Slice个数越多，处理单元的组织方式越多，性能便越强大。</p>
+<p>Intel HD Graphics也就是GT2中只有一个Slice，而对于Iris系列中的GT3则有两个Slice；GT3e相对于GT3增加了eDRAM使其具有更快的内存访问速度，而GT4e则增加到三个Slice。</p>
+<p>GPU的基础功能模块主要由EU以及相关的Media Processing（MFX）等组成。一个Slice中有三个Sub-Slice，Sub-Slice中包含具体的EU和Media Sampler模块作为最基本的可编程处理单元，GPU相关的任务都是在EU上进行。而Media Processing中还集成了一个被称为MFX的独立模块，主要由Media Format Codec（MFX）与VQE组成。</p>
+<p>MFX可将一些处理任务通过Fix Function打包，固定于一个执行单元中进行统一的编解码处理，不调用EU从而实现提高EU处理3D图形等任务的速度。Video Quality Engine（VQE）提供De-interlace与De-Noise等视频处理任务，在编解码中使用EU是为了得到更高的视频编码质量。</p>
+<h3 id="1-3-结构演进"><a href="#1-3-结构演进" class="headerlink" title="1.3 结构演进"></a>1.3 结构演进</h3><p><img src="/images/QSV4.jpg"><br>上图展示的是英特尔几代核芯显卡产品在结构上的变化。</p>
+<p>最早的Haswell架构也就是v3系列中的EU个数相对较少，最多为40个；而到Broadwell架构的GT3中集成了2个Slice，EU个数随之增加到48个，图像处理性能也随之增强。</p>
+<p>从Broadwell架构发展到Skylake架构，除了EU与Slice格式增加的变化，MFX的组织也有相应改进。Broadwell架构是将MFX集成于一个Slice中，一个Slice集成一个MFX；而到Skylake架构之后Slice的个数增加了但MFX的个数并没有，此时的MFC便集成在Slice之外。</p>
+<p>随着组织方式的改变，核芯显卡的功能也随之改变：Skylake增加了HEVC的Decoder、PAK增加了基于HEVC的处理功能等改进为核芯显卡整体处理性能带来了显著提升，第六代以后的核芯显卡也都主要沿用GT3的架构组织。<br><img src="/images/QSV5.jpg"></p>
+<blockquote>
+<p>从Driver分发下来的Command Stream回通过多条路径在GPU上得到执行：如果命令属于编解码的Fix Function则会由MFX执行，部分与视频处理相关的命令会由VQE执行，其他的命令则会由EU执行。</p>
+</blockquote>
+<p>而编码过程主要分为两部分：ENC与PAK。ENC主要通过硬件实现Rate Control、Motion Estimation、Intra Prediction、Mode Decision等功能；PAK进行Motion Comp、Intra Prediction、Forward Quant、Pixel Reconstruction、Entropy Coding等功能。<br>在目前的英特尔架构中，Media SDK通过API对硬件进行统一的调度与使用，同时我们提供更底层的接口Flexible Encoder Interface（FEI）以实现更优秀的底层调度与更好的处理效果。</p>
+<h2 id="2、软件策略"><a href="#2、软件策略" class="headerlink" title="2、软件策略"></a>2、软件策略</h2><p><img src="/images/QSV6.jpg"><br>最底层的FFmpeg可允许开发者将QSV集成进FFmpeg中以便于开发，而Media SDK则主要被用于编解码处理，FFmpeg可把整个多媒体处理有效结合。</p>
+<p>如果开发者认为传统的Media SDK的处理质量无法达到要求或码率控制不符合某些特定场景，那么可以通过调用FEI等更底层的接口对控制算法进行优化；最顶层的OpenCL接口则利用GPU功能实现边缘计算等处理任务，常见的Hybrid编码方式便使用了OpenCL。除此之外OpenCL也可实现一些其他的并行处理功能，例如与AI相关的一些计算。</p>
+<h3 id="2-1-Media-SDK"><a href="#2-1-Media-SDK" class="headerlink" title="2.1 Media SDK"></a>2.1 Media SDK</h3><p><img src="/images/QSV7.jpg"><br>Media SDK分为以下几个版本：Community Edition是一个包含了基本功能的部分免费版本，Essential Edition与Professional Edition则是具有更多功能的收费版本，可实现例如hybrid HEVC 编码，Audio的编解码、Video Quality Caliper Tool等诸多高级功能和分析工具的集合。</p>
+<ol>
+<li>软件架构<br><img src="/images/QSV8.jpg"></li>
+</ol>
+<ul>
+<li>上图主要介绍的是Media Server Studio Software Stack软件架构，我们基于此架构实现FFmpeg的加速。</li>
+</ul>
+<blockquote>
+<p><strong>这里需注意：</strong></p>
+</blockquote>
+<ul>
+<li>OpenGL （mesa）与linux内核一直是开源的项目，但之前版本的MSS中存在一些私有的内核补丁，并对操作系统的或对Linux的内核版本有特殊要求。<blockquote>
+</blockquote>
+</li>
+<li>HD Graphics Driver for Linux之前是一个闭源的方案，而现在的MSDK 和用户态驱动（iHD驱动）都已经实现开源。现在我们正在制作一个基于开源版本的Release，未来大家可以通过此开源平台获得更好的技术支持。</li>
+</ul>
+<ol start="2">
+<li>编解码支持</li>
+</ol>
+<p><img src="/images/QSV9.jpg"></p>
+<p>关于编解码支持，其中我想强调的是HEVC 8 bit 与10 bit的编解码。在Gen 9也就是Skylake上并不支持硬件级别的HEVC 10 bit解码，面对这种情况我们可以通过混合模式实现对HEVC 10 bit的编解码功能。最新E3v6（Kabylake）虽然只有较低性能的GPU配置，但可以支持HEVC 10 bit解码，HEVC 10 bit编码功能则会在以后发布的芯片中提供。</p>
+<h3 id="2-2-QSV到FFmpeg的集成思路"><a href="#2-2-QSV到FFmpeg的集成思路" class="headerlink" title="2.2 QSV到FFmpeg的集成思路"></a>2.2 QSV到FFmpeg的集成思路</h3><p><img src="/images/QSV10.jpg"></p>
+<p>FFmpeg集成的思路主要如下：</p>
+<ol>
+<li><p>FFmpeg QSV Plugins：将SDK作为FFmpeg的一部分进行封装，其中包括Decoder、Encoder与VPP Filter处理。</p>
+</li>
+<li><p>VAPPI Plugin：Media对整个英特尔GPU的软件架构而言，从最底层的linux内核，中间有用户态驱动，对外的统一的接口就是VAAPI。Media SDK的硬件加速就是基于VAAPI开发，同时增加了很多相关的功能，其代码更为复杂；而现在增加的VAAPI Plugin则会直接调用LibAV使软硬件结合更为紧密。</p>
+</li>
+</ol>
+<p><img src="/images/QSV11.jpg"></p>
+<p>将SDK集成到FFmpeg中，一共分为AVDecoder、AVEncoder、AVFilter三个部分：</p>
+<ol>
+<li>AVFilter</li>
+</ol>
+<p>AVFilter主要是利用硬件的GPU实现Video Processor功能，其中包括<code>vpp_qsv</code>、<code>overlay_qsv</code>、<code>hwupload_qsv</code>，其中我们重点开发了<code>overlay_qsv</code>，<code>vpp_qsv</code>与<code>hwupload_qsv</code>。 如果在一个视频处理的pipeline中有多个VPP的实例运行，会对性能造成很大的影响。我们的方案是实现一个大的VPP Filter中集成所有功能并通过设置参数实现调用，避免了多个VPP的实例存在。</p>
+<p>但是为什么将<code>vpp_qsv</code>与<code>overlay_qsv</code>分开？这是因为无法在一个VPP实例中同时完成compositor和一些视频处理功能（像<code>de-interlace</code>等）。英特尔核芯显卡内显存中的存储格式为NV12， 和非硬件加速的模块联合工作时，需要对Frame Buffer进行从系统内存到显卡显存的复制过程，<code>hwupload_qsv</code>提供了在系统内存和显卡内存之间进行快速帧转换的功能。</p>
+<ol start="2">
+<li>AVEncoder</li>
+</ol>
+<p>AVEncoder目前支持H264、HEVC、MPEG-2等解码的硬件加速。</p>
+<ol start="3">
+<li>AVDecoder</li>
+</ol>
+<p>AVDecoder目前支持H264、HEVC、MPEG-2等协议的硬件加速。</p>
+<p>最理想的方案是在整条视频处理的Pipeline中都使用显卡内存从而不存在内存之间的帧拷贝，从而达到最快的处理速度，但在实际应用中我们很多时候是做不到这一点。</p>
+<p>将MSDK集成进FFmpeg中时需要解决内存转换的问题，例如VPP Filter不支持一些功能或原始码流并不在Decoder支持的列表中。上图中粉色与绿色的转换表示的就是数据从显存到系统内存再到显存之间的转换。我们在实践中经常会遇到处理性能的急剧变化，可能的原因就是一些非硬件处理的模块和硬件加速的模块存在与同一个pipeline中，从而对整体性能造成影响。这是因为进行了额外的内存拷贝过程，一旦优化不足则会极大影响性能。</p>
+<p>具体进行内存分配时我们使用了hwcontext，这是FFmpeg在3.0之后增加的一个功能。我们基于FFmpeg中hwcontext的机制实现了hwcontext_qsv，从而对硬件的初始化与内存分配进行很好的管理。</p>
+<h2 id="三、对比MSS与FFmpeg-QSV"><a href="#三、对比MSS与FFmpeg-QSV" class="headerlink" title="三、对比MSS与FFmpeg+QSV"></a>三、对比MSS与FFmpeg+QSV</h2><p><img src="/images/QSV12.jpg"></p>
+<blockquote>
+<blockquote>
+<p>二者支持相同的编解码器与视频处理。</p>
+</blockquote>
+</blockquote>
+<p>二者的差异有：</p>
+<ul>
+<li><p>MSS 仅提供了一套库和工具，用户必须基于 MSS进行二次开发；而FFmpeg 是一个流行的多媒体开放框架, QSV的GPU加速只是其中的一部分。</p>
+</li>
+<li><p>MSS的库中提供 了VPP 接口，用户要实现某些功能必须进行二次开发。而目前,FFmpeg+QSV已存在2个开发好的Filter，并且在Filter中集成了MSS 支持的所有功能，并提供更加简单的选项进行配置，这些功能对用户而言都是方便使用的。</p>
+</li>
+<li><p>在内存管理上，MSS的开发人员必须管理自己的内存；而FFmpeg 提供基本的内存管理单元并实现系统内存的统一调用，集成了硬件级别的内存处理机制。</p>
+</li>
+<li><p>FFmpeg 提供了一定的容错机制与 a&#x2F;v 同步机制；FFmpeg+QSV 模块充分利用这些机制来提高兼容性，像使用ffmpeg的parse工具进行视频流预处理。</p>
+</li>
+<li><p>处理流程上，MSS的用户在使用MSS模块之前必须自己开发Mux&#x2F;Demux或其他必要的模块；而FFmpeg+QSV 由于是基于 MSS 实现并添加了特殊的逻辑, 每个模块都可与 FFmpeg 的其他模块一起工作。</p>
+</li>
+</ul>
+<p>可以说FFmpeg有很强大的媒体支持，相对于传统的MSS在保证性能与质量的前提下为用户节省很多工作量并显著提升开发效率。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>更新日志</title>
+    <url>/2024/06/16/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
+    <content><![CDATA[<h4 id="站点数据更新日志统一记录页"><a href="#站点数据更新日志统一记录页" class="headerlink" title="站点数据更新日志统一记录页"></a>站点数据更新日志统一记录页</h4><span id="more"></span>
+<hr>
+<h1 id="2024年"><a href="#2024年" class="headerlink" title="2024年"></a>2024年</h1><h2 id="2月13日"><a href="#2月13日" class="headerlink" title="2月13日"></a>2月13日</h2><ul>
+<li>删除了 <strong>大学英语语法总结</strong> 和 <strong>CSGO音乐盒原曲</strong></li>
+<li>网站CDN加速服务更换至阿里云服务</li>
+<li>站点主体维护</li>
+<li>更改了一些细节</li>
+</ul>
+<h1 id="2023年"><a href="#2023年" class="headerlink" title="2023年"></a>2023年</h1><h2 id="6月9日-更新日志"><a href="#6月9日-更新日志" class="headerlink" title="6月9日 更新日志"></a>6月9日 更新日志</h2><ul>
+<li>新增文章 <strong>CSGO音乐盒原曲</strong></li>
+<li>加入嵌入式第三方组件</li>
+<li>3A415界面切块游戏回归</li>
+<li>微调界面文字与布局</li>
+</ul>
+<h2 id="5月19日-更新日志"><a href="#5月19日-更新日志" class="headerlink" title="5月19日 更新日志"></a>5月19日 更新日志</h2><ul>
+<li>网站界面重构</li>
+<li>网站接入CDN加速服务</li>
+<li>优化网站整体体验</li>
+</ul>
+<h2 id="5月6日-更新日志"><a href="#5月6日-更新日志" class="headerlink" title="5月6日 更新日志"></a>5月6日 更新日志</h2><ul>
+<li>3A415页面临时改为Major 2023倒计时界面 (单击页面中的图片可跳转至主办方官网)</li>
+</ul>
+<h2 id="5月4日-更新日志"><a href="#5月4日-更新日志" class="headerlink" title="5月4日 更新日志"></a>5月4日 更新日志</h2><ul>
+<li>3A415界面更新彩蛋 (界面重写)</li>
+<li>优化部分浏览体验</li>
+</ul>
+<h2 id="5月1日-更新日志"><a href="#5月1日-更新日志" class="headerlink" title="5月1日 更新日志"></a>5月1日 更新日志</h2><ul>
+<li>更改部分页面的背景图</li>
+<li>在<strong>OBS——推流录制工具</strong>一文中插入若干图片</li>
+<li>在全局底栏和文章页正文标题中加入渐变文字效果</li>
+</ul>
+<h2 id="4月28日-更新日志"><a href="#4月28日-更新日志" class="headerlink" title="4月28日 更新日志"></a>4月28日 更新日志</h2><ul>
+<li>新增文章：<strong>OBS-推流录制工具</strong></li>
+<li>更新文章：<strong>CSGO控制台指令简明索引</strong></li>
+<li>更改了部分文章的banner图片</li>
+</ul>
+<h2 id="4月27日-更新日志"><a href="#4月27日-更新日志" class="headerlink" title="4月27日 更新日志"></a>4月27日 更新日志</h2><ul>
+<li>新增文章：<strong>大学英语语法总结</strong></li>
+<li>更改主页图片</li>
+<li>优化导航栏模糊效果</li>
+</ul>
+<h2 id="4月3日-更新日志"><a href="#4月3日-更新日志" class="headerlink" title="4月3日 更新日志"></a>4月3日 更新日志</h2><ul>
+<li>新增页面：<strong>3A415</strong></li>
+<li>简化顶部导航栏项目</li>
+</ul>
+<h2 id="4月2日更新日志"><a href="#4月2日更新日志" class="headerlink" title="4月2日更新日志"></a>4月2日更新日志</h2><ul>
+<li>站点底部新增外部链接</li>
+<li>新增全局中国标准时间校准</li>
+<li>新增文章：<strong>更新日志</strong></li>
+<li>关于页面新增外部链接和图片</li>
+</ul>
+<h2 id="3月29日-更新日志"><a href="#3月29日-更新日志" class="headerlink" title="3月29日 更新日志"></a>3月29日 更新日志</h2><ul>
+<li>站点底部加入访问统计数据</li>
+<li>新增文章：<strong>CSGO控制台指令简明索引</strong></li>
+<li>添加文章在首页展示的简略描述信息</li>
+<li>新增文章页的数据统计</li>
+<li>新增文章页的更新通知</li>
+</ul>
+<h2 id="3月27日-更新日志"><a href="#3月27日-更新日志" class="headerlink" title="3月27日 更新日志"></a>3月27日 更新日志</h2><ul>
+<li>新建 <strong>关于</strong> 页面</li>
+<li>更改关于页面中的相关信息</li>
+<li>新增站点顶栏毛玻璃模糊效果</li>
+</ul>
+<h2 id="3月24日-更新日志"><a href="#3月24日-更新日志" class="headerlink" title="3月24日 更新日志"></a>3月24日 更新日志</h2><ul>
+<li>更改站点全局主题</li>
+<li>更改站点全局字体为系统UI字体</li>
+<li>加入文章字数和浏览量统计</li>
+<li>加入文章发布时间和作者署名</li>
+</ul>
+<h2 id="3月23日-更新日志"><a href="#3月23日-更新日志" class="headerlink" title="3月23日 更新日志"></a>3月23日 更新日志</h2><ul>
+<li>新建站点ChenHNSY.Gitee.io</li>
+<li>更改站点标题为OYAMAMahiro</li>
+<li>更改站点的归属权为OYAMAMahiro</li>
+<li>更改站点首页文字</li>
+<li>调快首页文字的出场速度</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>OBS_推流录制工具</title>
+    <url>/2024/06/16/OBS-%E6%8E%A8%E6%B5%81%E5%BD%95%E5%88%B6%E5%B7%A5%E5%85%B7/</url>
+    <content><![CDATA[<h4 id="基于OBS-28-0-的基础面板解释。"><a href="#基于OBS-28-0-的基础面板解释。" class="headerlink" title="基于OBS 28.0 的基础面板解释。"></a>基于OBS 28.0 的基础面板解释。</h4><span id="more"></span>
+<h1 id="OBS——推流录制工具"><a href="#OBS——推流录制工具" class="headerlink" title="OBS——推流录制工具"></a>OBS——推流录制工具</h1><p><strong>OBS</strong> (Open Broadcaster Software) 是一款开源、免费、跨平台的直播推流和视频录制工具，它功能强大、可调空间大、上限很高，但是因为它主要为直播而设计，录制操作的便利性较差，上手有一定难度。和一众录屏工具（包括N&#x2F;A卡驱动自带录屏）和它的套皮软件相比，OBS 属于那种 <strong>“愿意花一些时间研究能带来更高画质和效率”</strong> 的工具。</p>
+<p>本文将会基于 <code>28.0</code> 版本介绍直播推流和录制相关的设置，并以<strong>CSGO素材录制</strong>为例介绍游戏场景下的设置策略和一些 Trick，注意 OBS 实际分为 Studio 和 Classic 两个版本，Classic 版本有更好的兼容性，对较老的系统和设备有些用处，一般都用 Studio 版本。<br><img src="/images/OBS0.png"></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>官网：<a href="https://obsproject.com/">https://obsproject.com</a></p>
+<p>项目：<a href="https://github.com/obsproject/obs-studio">https://github.com/obsproject/obs-studio</a></p>
+<p>论坛：<a href="https://obsproject.com/forum">https://obsproject.com/forum</a></p>
+<p>资源：<a href="https://obsproject.com/forum/resources">https://obsproject.com/forum/resources</a></p>
+<blockquote>
+<p>资源页包含各种插件、脚本、主题和工具。</p>
+</blockquote>
+<p>OBS Studio 已经登录 Steam 商店，同样免费。如果担心下载和更新的速度，可以直接从 Steam 下载，相对更加方便。</p>
+<h2 id="初识OBS"><a href="#初识OBS" class="headerlink" title="初识OBS"></a>初识OBS</h2><p><img src="/images/OBS1.png"><br>启动 OBS，忽略首次引导，主界面如图所示。可以看到界面分为以下几个部分：</p>
+<ul>
+<li>顶部菜单栏</li>
+<li>预览窗口</li>
+<li>快捷工具栏</li>
+<li>来源</li>
+<li>混音器</li>
+<li>场景</li>
+<li>转场特效</li>
+<li>控件</li>
+</ul>
+<h3 id="来源面板"><a href="#来源面板" class="headerlink" title="来源面板"></a>来源面板</h3><p>看到 <code>来源</code> 面板，我们需要添加合适的源得到想要的画面，这里的源类似 <code>PhotoShop</code> 里 <code>图层</code> 的概念，上层会覆盖下层，顺序可以随意调整，来源不可用时为透明，不会影响下一层。</p>
+<p>可以添加的来源有很多种，首先添加一个 <code>显示器采集</code> 源，一切默认，这样我们就能预览看到画面了。</p>
+<p><code>游戏源</code> 和 <code>窗口采集</code> 可以专门捕获全屏游戏或某个游戏&#x2F;窗口，捕获游戏时的性能会更好，可以把它们放在显示器源的上层，兼顾性能和便利，也可以关闭显示器源，不暴露桌面情况只展示特定游戏或窗口。</p>
+<p><code>应用程序音频捕获</code> 是当前正在测试的功能，可以获取特定程序的声音，特别适合分离游戏&#x2F;语音音源，方便后期处理，后面会详细介绍。</p>
+<p><img src="/images/OBS2.png"></p>
+<h3 id="混音器面板"><a href="#混音器面板" class="headerlink" title="混音器面板"></a>混音器面板</h3><p>这里我们可以调整各个声音来源的音量和滤镜，改变它们的混合比例。打开某个音源的滤镜页，可以添加 <code>降噪、阈值</code> 等滤镜，包括电脑中已安装的VST效果，图中简单加了一个 <code>噪音抑制</code>，效果尚可。</p>
+<p>点“齿轮”按钮或右键打开<strong>高级音频属性</strong>，这里可以进一步调整音量、左右平衡、偏移和监听，和较为重要的<strong>轨道</strong>。轨道中某个数字是否勾选代表它是否在该轨道中出现，一般会在轨道1中保留主要声音&#x2F;直播观众听到的声音，其他轨道分别设置麦克风、开黑语音等音源，方便后期处理。</p>
+<p><img src="/images/OBS3.png"></p>
+<h3 id="场景面板"><a href="#场景面板" class="headerlink" title="场景面板"></a>场景面板</h3><p>设置和调整各个场景（Scene），直播往往需要多个不同场景，如正式开播前的等候场景、游戏A、B、C的场景、聊天场景等等。提前设置好各个场景可以避免来源面板臃肿和不断开关来源的麻烦。搭配相应的工具（如StreamDeck）可以实现快速切换场景，给直播带来便利。</p>
+<p>场景之上还有一个场景集合的概念，在顶部菜单栏可以看到，可以更方便的分组、导入导出场景设置。</p>
+<h3 id="转场特效面板"><a href="#转场特效面板" class="headerlink" title="转场特效面板"></a>转场特效面板</h3><p>调整场景切换时的转场特效，默认只有渐变和裁切，即交叉溶解和硬切，通过安装转场插件可以添加更多效果。</p>
+<h3 id="预览窗口"><a href="#预览窗口" class="headerlink" title="预览窗口"></a>预览窗口</h3><p>除了实时预览效果，在预览窗口还可以全屏投影、截屏和调整源的尺寸及位置。</p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>类似刚才提到的场景集合，每一个<strong>配置文件</strong>对应一组接下来要介绍的设置，整个设置面板的内容都包括在内（录制、推流、快捷键等），注意它和场景互不干扰，要分别设置。</p>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><p>从控件面板点击按钮打开设置面板，这里按照录制设置的逻辑顺序介绍，以下每一小节对应左侧的标签栏名称。</p>
+<h2 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h2><p>在这里可以调整画布和输出的分辨率、缩小方法和录制帧率FPS。</p>
+<p>两个分辨率一般保持一致，即<strong>你想要的录制&#x2F;推流分辨率</strong>，并且此时缩小方法不会生效。基础分辨率大于输出分辨率相当于超采，理论上画面细节会更好，性能消耗也会更高。不过这里调整缩放和来源设置的缩放有些重复，除非想要1080P推流同时4K录像，一般不要动，一致即可。</p>
+<p><strong>常用 FPS 值</strong> 不超过60，想要录制更高帧率可以改成 <strong>整数 FPS 值</strong>，最高能到120，再往上可以设置<strong>分数 FPS 值</strong>，如 <code>180FPS -&gt; 180/1</code>，不过此时录制的性能一般有瓶颈。</p>
+<h2 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h2><p>高级页一般要注意的是 视频、录像、串流延迟这三个部分。</p>
+<p><strong>色彩格式</strong>默认的NV12适合推流，设置成其他格式则会有格式转换的性能消耗，但如果机器的性能尚可，建议设置成 <code>I420</code>。如果追求更高的画质，<code>I420</code>下色彩信息损失较多，可以考虑修改为 <code>I444</code>，但它的兼容性较差，<strong>请务必确认你所使用的软件能够正确识别和播放</strong>。</p>
+<blockquote>
+<p>想要进一步了解可以搜索 <code>色度抽样</code></p>
+</blockquote>
+<p><strong>色彩范围</strong>设置为有限会丢弃掉一些超黑超白数据。直播场景建议保持 <code>受限</code> 以规避一些问题。在录制场景下可以设置为 <code>完全</code>，<strong>注意此时部分播放器可能会出现异常</strong>。</p>
+<p><strong>录像</strong>的<strong>文件名格式</strong>中包含年月日和时间，可以根据需要修改。</p>
+<p><strong>自动封装至MP4格式</strong>再录制文件格式为MKV时会自动在录制完成后转换格式，后文中展开说明。</p>
+<p><strong>回放缓存文件名前缀&#x2F;后缀</strong> 设置回放缓存（即时重放）功能保存的视频文件名，和录制得到的文件作区分，建议前缀或者后缀改成<code>即时重放</code>。</p>
+<p><strong>串流延迟</strong>顾名思义，主要用于游戏直播防窥屏等需求。</p>
+<p><img src="/images/OBS4.png"></p>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>输出页包含推流、录像、音频和回放缓存（即时重放）的设置，也是OBS设置的难点。</p>
+<p><strong>输出模式</strong>建议设置成 <code>高级</code> 以获得最大的调整空间，<code>简单模式</code> 下的录像设置不是很够。如果你想要更简单一些，可以先看下去，如果你需要的选项在 <code>简单模式</code> 下就能调整好也可以不动。</p>
+<p><img src="/images/OBS5.png"></p>
+<h4 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a>编码器</h4><p>编码器是OBS设置的重点。其中 x264 是 CPU 软件编码，比较吃CPU的性能和多核性能，而显卡编码一般对性能影响较小，但是画质较差，NVIDIA显卡有 NVENC，AMD显卡有 AMF，Intel显卡有 QuickSync，Mac下也有对应的编码器。</p>
+<p>显卡编码非常适合游戏场景，我们可以把推流和录像都设置成显卡编码或者一个CPU编码、一个显卡编码平衡负载。</p>
+<h5 id="x264-编码器"><a href="#x264-编码器" class="headerlink" title="x264 编码器"></a>x264 编码器</h5><p>一般关注这三个设置</p>
+<ul>
+<li>码率控制：固定码率CBR&#x2F;可变码率VBR&#x2F;CRF<ul>
+<li>VBR 更节省码率，但画面变换时码率变换可能滞后导致码率不够，出现明显模糊</li>
+<li>CRF 模式适合录像，数值越低画质越高</li>
+</ul>
+</li>
+<li>比特率：CBR&#x2F;VBR下可用<ul>
+<li>直播建议在 4000Kbps 以上</li>
+<li>8000Kbps 附近比较适合 1080P 直播</li>
+<li>码率上限取决于网络的上行带宽，建议测试网速确保带宽足够</li>
+</ul>
+</li>
+<li>CPU使用预设：对CPU占用影响较大，掉帧时提高（使用更快）预设</li>
+</ul>
+<h5 id="NVIDIA-NVENC-H-264-编码器"><a href="#NVIDIA-NVENC-H-264-编码器" class="headerlink" title="NVIDIA NVENC H.264 编码器"></a>NVIDIA NVENC H.264 编码器</h5><blockquote>
+<p>可以尝试使用 <code>NVIDIA NVENC HEVC</code>，但要考虑到直播平台是否支持，和部分设备无法硬解时出现的卡顿情况。</p>
+</blockquote>
+<ul>
+<li>速率控制：同上码率控制</li>
+<li>最大比特率：可以在比特率的基础上加 <code>2000~5000 Kbps</code></li>
+<li>预设：直播时尽可能在带有<code>性能</code>的三个档位中选择，推荐 <code>性能</code></li>
+<li>录像：CQP 模式，数值 <code>12~23</code>；预设改为<code>质量/最高质量</code></li>
+</ul>
+<h5 id="Apple-ProRes-编码器"><a href="#Apple-ProRes-编码器" class="headerlink" title="Apple ProRes 编码器"></a>Apple ProRes 编码器</h5><p>安装 <a href="https://obsproject.com/forum/resources/streamfx-for-obs%C2%AE-studio.578">StreamFX</a>插件后可用，录像时可以考虑尝试使用，适用于对画质要求高且配置、存储足够的用户，建议<strong>配置</strong>设置 <code>422标准</code> 或 <code>422高品质</code></p>
+<blockquote>
+<p>更多的编码知识和OBS编码器设置作业参见 <a href="https://nazorip.site/archives/63/">iAvoe的文档</a></p>
+</blockquote>
+<h4 id="录像"><a href="#录像" class="headerlink" title="录像"></a>录像</h4><p>录像格式：即录像文件的封装格式，OBS 里的编码格式基本都支持 mp4&#x2F;mov&#x2F;mkv 封装，区别是 mkv 封装<strong>遇到断电等意外情况时可以保留之前录好的部分</strong>，<code>菜单栏-文件-录像转封装</code> 处转换为 mp4 格式后即可正常播放，但是部分播放器和软件（如旧版本Pr&#x2F;Ae）支持较差，可能会无法播放。有需要可以前往 <code>高级页</code> 设置自动转换封装。</p>
+<p>音轨：如要分离音频方便后期处理，这里务必勾选上所有要用到的音轨。</p>
+<p>编码器：如设置成 <strong>（使用推流编码器）</strong>，则会把直播的画面直接保存到本地，但对录像来说画质可能不够好，只求记录时可以这样设置，追求画面则设置成其他编码器。</p>
+<p>重新缩放输出：期望的推流和录像分辨率不一致时启用。</p>
+<p>自动分割文件：录制时间较长时可以固定文件大小&#x2F;时长分割保存到硬盘中，降低意外情况下的风险，也方便筛选素材。</p>
+<p><img src="/images/OBS6.png"></p>
+<h4 id="音频"><a href="#音频" class="headerlink" title="音频"></a>音频</h4><p>这里可以设置更高的比特率&#x2F;码率&#x2F;位率，提高声音质量，也可以给不同的轨道起名字方便后期区分。</p>
+<h4 id="回放缓存"><a href="#回放缓存" class="headerlink" title="回放缓存"></a>回放缓存</h4><p>相当于N卡的即时重放，非常适合保存游戏的高光时刻。</p>
+<p>最长回放时间：建议设置 <code>90s</code> 或 <code>120s</code></p>
+<blockquote>
+<p>强迫症玩家可以 +1s 不然实际时长会小 1s</p>
+</blockquote>
+<p>最大内存：无法估计时尽可能给高，如 <code>4096MB</code> 或 <code>8192MB</code></p>
+<h3 id="推流"><a href="#推流" class="headerlink" title="推流"></a>推流</h3><p>这里设置推流的服务器和秘钥，OBS默认并不支持国内的直播平台，把<strong>服务</strong>修改成 <code>自定义...</code>，从直播平台的开播页找到服务器地址和秘钥并复制到这里，注意不要泄露秘钥。</p>
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h3><p>这里没有什么难点，注意<strong>开始推流&#x2F;停止推流</strong>设置同一个快捷键时，按键为开关式，一开一关。一般建议设置的快捷键：</p>
+<ul>
+<li>开始推流</li>
+<li>停止推流</li>
+<li>开始录制</li>
+<li>停止录制</li>
+<li>开始回放缓存</li>
+<li>停止回放缓存</li>
+<li>保存回放（<strong>输出</strong>页启用回放缓存后才可见）</li>
+</ul>
+<h2 id="CSGO素材录制"><a href="#CSGO素材录制" class="headerlink" title="CSGO素材录制"></a>CSGO素材录制</h2><h3 id="画面捕获"><a href="#画面捕获" class="headerlink" title="画面捕获"></a>画面捕获</h3><ul>
+<li>想得到<strong>拉伸画面</strong>，对源<strong>右键-变换-拉伸到全屏</strong> 或者选中源 <code>Ctrl+S</code></li>
+<li>取消相应游戏源&#x2F;窗口捕获&#x2F;显示器捕获中的 <code>显示鼠标指针</code></li>
+<li>受<strong>CSGO受信任模式</strong>的影响，官方匹配&#x2F;直接启动游戏时无法捕获游戏流，只能捕获显示器，性能较差；平台游戏不受影响。</li>
+<li>针对本地回放录像 demo 录屏有两种解决方法：<ol>
+<li>启动项添加 <code>-allow_third_party_software</code></li>
+<li>使用 <a href="https://advancedfx.org/">HLAE</a>启动 CSGO</li>
+</ol>
+</li>
+</ul>
+<h3 id="声音捕获"><a href="#声音捕获" class="headerlink" title="声音捕获"></a>声音捕获</h3><ol>
+<li>在<strong>来源面板</strong>添加<strong>应用程序音频捕获</strong>，先启动一次游戏并设置好捕获的窗口 <code>csgo.exe</code>。</li>
+<li>在<strong>高级音频属性</strong>中调整轨道分配，让游戏的音频单独一轨，<strong>设置-音轨-录像</strong>启用对应轨道。</li>
+</ol>
+<h3 id="录像设置"><a href="#录像设置" class="headerlink" title="录像设置"></a>录像设置</h3><p>CPU&#x2F;显卡编码根据个人偏好和电脑配置情况选择，以下给出推荐设置：</p>
+<h4 id="x264-编码器-1"><a href="#x264-编码器-1" class="headerlink" title="x264 编码器"></a>x264 编码器</h4><ul>
+<li>码率控制模式：强烈建议选择 <strong>CRF</strong></li>
+<li>CRF 的数值越小，画质越高，文件越大，推荐范围 <code>6~16</code></li>
+<li>CRF 数值减 6，码率翻倍</li>
+<li>CPU 使用预设 <code>veryfast ~ ultrafast</code> 选一个当前设置下不掉帧的档位，建议 <code>ultrafast</code></li>
+</ul>
+<h4 id="NVIDIA-NVENC-H-264-HEVC-编码器"><a href="#NVIDIA-NVENC-H-264-HEVC-编码器" class="headerlink" title="NVIDIA NVENC H.264&#x2F;HEVC 编码器"></a>NVIDIA NVENC H.264&#x2F;HEVC 编码器</h4><ul>
+<li>编码器：HEVC 比 H.264 效率更高，尤其是高分辨率</li>
+<li>速率控制：由于没有 CRF 模式，这里选择 CQP 模式</li>
+<li>CQ 级别：<ul>
+<li>H.264：推荐 <code>12</code>，不超过 <code>23</code></li>
+<li>HEVC：推荐 <code>16</code>，不超过 <code>26</code></li>
+</ul>
+</li>
+<li>预设：选 <code>质量</code> 或 <code>最高质量</code></li>
+</ul>
+<h4 id="Apple-ProRes-编码器-1"><a href="#Apple-ProRes-编码器-1" class="headerlink" title="Apple ProRes 编码器"></a>Apple ProRes 编码器</h4><p><strong>配置</strong>选择 <code>422 标准（APCN）</code></p>
+<h4 id="游戏设置"><a href="#游戏设置" class="headerlink" title="游戏设置"></a>游戏设置</h4><ul>
+<li>窗口模式</li>
+<li>取消绑定 Ctrl，追踪投掷物从 Alt 改为 R，避免切屏和截图时出现异常</li>
+<li>游戏中播放和暂停快捷键可与 OBS 开始&#x2F;结束录制保持一致</li>
+<li>控制台指令 <code>engine_no_focus_sleep 0</code> 确保窗口失焦后不掉帧</li>
+<li>慢放录像，如 1&#x2F;4：<code>demo_timescale 0.25</code> 或 <code>Shift+F2</code> 在 demoui 中手动操作</li>
+<li>限制游戏渲染帧率，如 120fps：<code>fps_max 120</code></li>
+</ul>
+<h4 id="帧率调整"><a href="#帧率调整" class="headerlink" title="帧率调整"></a>帧率调整</h4><p>录制高帧率素材的时候我们一般会慢放录像+限制FPS节省资源给OBS留出更多的性能空间，在编码设置确定之后调整录制帧率可以明显提高录制的速度，可参照上文设置120FPS甚至更高的帧率。</p>
+<p>菜单栏-停靠窗口-统计：启用统计面板，可以看到<strong>由于渲染延迟错过的帧</strong>和<strong>由于编码延迟跳过的帧</strong>和<strong>FPS</strong>。颜色变黄&#x2F;变红或丢帧较多时（偶尔）说明当前设置无法完美录像，需要调整编码器设置或降低录制FPS。</p>
+<p><img src="/images/OBS8.png"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>about</title>
+    <url>/2024/08/22/about/</url>
+    <content><![CDATA[<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>切块</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>body {
+    margin: 0;
+    background-color: #000;
+    background-image: radial-gradient(ellipse at top, #335476 0.0%, #31506e 11.1%, #304b67 22.2%, #2f4760 33.3%, #2d4359 44.4%, #2c3f51 55.6%, #2a3a4a 66.7%, #293643 77.8%, #28323d 88.9%, #262e36 100.0%);
+    height: 100vh;
+    overflow: hidden;
+
+    font-family: monospace;
+    font-weight: bold;
+    font-weight: 200;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#c {
+    display: block;
+    touch-action: none;
+    transform: translateZ(0);
+}
+
+
+/*/////////////////////
+//        HUD        //
+/////////////////////*/
+
+
+.hud__score,
+.pause-btn {
+    position: fixed;
+    font-size: calc(14px + 2vw + 1vh);
+}
+
+.hud__score {
+    top: 0.65em;
+    left: 0.65em;
+    pointer-events: none;
+    user-select: none;
+}
+
+.cube-count-lbl {
+    font-size: 0.46em;
+}
+
+.pause-btn {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 0.8em 0.65em;
+}
+
+.pause-btn > div {
+    position: relative;
+    width: 0.8em;
+    height: 0.8em;
+    opacity: 0.75;
+}
+
+.pause-btn > div::before,
+.pause-btn > div::after {
+    content: '';
+    display: block;
+    width: 34%;
+    height: 100%;
+    position: absolute;
+    background-color: #fff;
+}
+
+.pause-btn > div::after {
+    right: 0;
+}
+
+.slowmo {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+    will-change: opacity;
+}
+
+.slowmo::before {
+    content: 'SLOW-MO';
+    display: block;
+    font-size: calc(8px + 1vw + 0.5vh);
+    margin-left: 0.5em;
+    margin-bottom: 8px;
+}
+
+.slowmo::after {
+    content: '';
+    display: block;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 1.5vh;
+    background-color: rgba(0, 0, 0, 0.25);
+    z-index: -1;
+}
+
+.slowmo__bar {
+    height: 1.5vh;
+    background-color: rgba(255, 255, 255, 0.75);
+    transform-origin: 0 0;
+}
+
+
+
+/*/////////////////////
+//       MENUS       //
+/////////////////////*/
+
+.menus::before {
+    content: '';
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    opacity: 0;
+    transition: opacity 0.2s;
+    transition-timing-function: ease-in;
+}
+
+.menus.has-active::before {
+    opacity: 0.08;
+    transition-duration: 0.4s;
+    transition-timing-function: ease-out;
+}
+
+.menus.interactive-mode::before {
+    opacity: 0.02;
+}
+
+
+
+/* Menu containers */
+.menu {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition-property: opacity, visibility, transform;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+}
+
+.menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition-duration: 0.4s;
+    transition-timing-function: ease-out;
+}
+
+.menus.interactive-mode .menu.active {
+    opacity: 0.6;
+}
+
+.menus:not(.interactive-mode) .menu.active > * {
+    pointer-events: auto;
+}
+
+
+/* Common menu elements */
+
+h1 {
+    font-size: 4rem;
+    line-height: 0.95;
+    text-align: center;
+    font-weight: bold;
+    margin: 0 0.65em 1em;
+}
+
+h2 {
+    font-size: 1.2rem;
+    line-height: 1;
+    text-align: center;
+    font-weight: bold;
+    margin: -1em 0.65em 1em;
+}
+
+.final-score-lbl {
+    font-size: 5rem;
+    margin: -0.2em 0 0;
+}
+
+.high-score-lbl {
+    font-size: 1.2rem;
+    margin: 0 0 2.5em;
+}
+
+button {
+    display: block;
+    position: relative;
+    width: 200px;
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    user-select: none;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #fff;
+    opacity: 0.75;
+    transition: opacity 0.3s;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(0, 0);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+/* No `:focus` styles because this is a mouse/touch game! */
+button:active {
+    opacity: 1;
+}
+
+button:active::before {
+    transform: scale(1, 1);
+    opacity: 1;
+}
+
+.credits {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 20px;
+}
+
+a {
+    color: white;
+}
+
+/* Only enable hover state on large screens */
+@media (min-width: 1025px) {
+    button:hover {
+        opacity: 1;
+    }
+
+    button:hover::before {
+        transform: scale(1, 1);
+        opacity: 1;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<!-- Game canvas -->
+<p><canvas id="c"></canvas></p>
+<!-- Gameplay HUD -->
+<div class="hud">
+    <div class="hud__score">
+        <div class="score-lbl"></div>
+        <div class="cube-count-lbl"></div>
+    </div>
+    <div class="pause-btn"><div></div></div>
+    <div class="slowmo">
+        <div class="slowmo__bar"></div>
+    </div>
+</div>
+
+<!-- Menu System -->
+<div class="menus">
+    <div class="menu menu--main">
+        <h1>OYAMAMahiro</h1>
+        <h1>切块</h1>
+        <button type="button" class="play-normal-btn">开始游戏</button>
+        <button type="button" class="play-casual-btn">休闲模式</button>
+    </div>
+    <div class="menu menu--pause">
+        <h1>暂停</h1>
+        <button type="button" class="resume-btn">重新开始</button>
+        <button type="button" class="menu-btn--pause">主菜单</button>
+    </div>
+    <div class="menu menu--score">
+        <h1>游戏结束</h1>
+        <h2>分数:</h2>
+        <div class="final-score-lbl"></div>
+        <div class="high-score-lbl"></div>
+        <button type="button" class="play-again-btn">再玩一次</button>
+        <button type="button" class="menu-btn--score">主菜单</button>
+    </div>
+</div>
+  
+<script>// globalConfig.js
+    // ============================================================================
+    // ============================================================================
+    
+    // Provides global variables used by the entire program.
+    // Most of this should be configuration.
+    
+    // Timing multiplier for entire game engine.
+    let gameSpeed = 1;
+    
+    // Colors
+    const BLUE =   { r: 0x67, g: 0xd7, b: 0xf0 };
+    const GREEN =  { r: 0xa6, g: 0xe0, b: 0x2c };
+    const PINK =   { r: 0xfa, g: 0x24, b: 0x73 };
+    const ORANGE = { r: 0xfe, g: 0x95, b: 0x22 };
+    const allColors = [BLUE, GREEN, PINK, ORANGE];
+    
+    // Gameplay
+    const getSpawnDelay = () => {
+        const spawnDelayMax = 1400;
+        const spawnDelayMin = 550;
+        const spawnDelay = spawnDelayMax - state.game.cubeCount * 3.1;
+        return Math.max(spawnDelay, spawnDelayMin);
+    }
+    const doubleStrongEnableScore = 2000;
+    // Number of cubes that must be smashed before activating a feature.
+    const slowmoThreshold = 10;
+    const strongThreshold = 25;
+    const spinnerThreshold = 25;
+    
+    // Interaction state
+    let pointerIsDown = false;
+    // The last known position of the primary pointer in screen coordinates.`
+    let pointerScreen = { x: 0, y: 0 };
+    // Same as `pointerScreen`, but converted to scene coordinates in rAF.
+    let pointerScene = { x: 0, y: 0 };
+    // Minimum speed of pointer before "hits" are counted.
+    const minPointerSpeed = 60;
+    // The hit speed affects the direction the target post-hit. This number dampens that force.
+    const hitDampening = 0.1;
+    // Backboard receives shadows and is the farthest negative Z position of entities.
+    const backboardZ = -400;
+    const shadowColor = '#262e36';
+    // How much air drag is applied to standard objects
+    const airDrag = 0.022;
+    const gravity = 0.3;
+    // Spark config
+    const sparkColor = 'rgba(170,221,255,.9)';
+    const sparkThickness = 2.2;
+    const airDragSpark = 0.1;
+    // Track pointer positions to show trail
+    const touchTrailColor = 'rgba(170,221,255,.62)';
+    const touchTrailThickness = 7;
+    const touchPointLife = 120;
+    const touchPoints = [];
+    // Size of in-game targets. This affects rendered size and hit area.
+    const targetRadius = 40;
+    const targetHitRadius = 50;
+    const makeTargetGlueColor = target => {
+        // const alpha = (target.health - 1) / (target.maxHealth - 1);
+        // return `rgba(170,221,255,${alpha.toFixed(3)})`;
+        return 'rgb(170,221,255)';
+    };
+    // Size of target fragments
+    const fragRadius = targetRadius / 3;
+    
+    
+    
+    // Game canvas element needed in setup.js and interaction.js
+    const canvas = document.querySelector('#c');
+    
+    // 3D camera config
+    // Affects perspective
+    const cameraDistance = 900;
+    // Does not affect perspective
+    const sceneScale = 1;
+    // Objects that get too close to the camera will be faded out to transparent over this range.
+    // const cameraFadeStartZ = 0.8*cameraDistance - 6*targetRadius;
+    const cameraFadeStartZ = 0.45*cameraDistance;
+    const cameraFadeEndZ = 0.65*cameraDistance;
+    const cameraFadeRange = cameraFadeEndZ - cameraFadeStartZ;
+    
+    // Globals used to accumlate all vertices/polygons in each frame
+    const allVertices = [];
+    const allPolys = [];
+    const allShadowVertices = [];
+    const allShadowPolys = [];
+    
+    
+    
+    
+    // state.js
+    // ============================================================================
+    // ============================================================================
+    
+    ///////////
+    // Enums //
+    ///////////
+    
+    // Game Modes
+    const GAME_MODE_RANKED = Symbol('GAME_MODE_RANKED');
+    const GAME_MODE_CASUAL = Symbol('GAME_MODE_CASUAL');
+    
+    // Available Menus
+    const MENU_MAIN = Symbol('MENU_MAIN');
+    const MENU_PAUSE = Symbol('MENU_PAUSE');
+    const MENU_SCORE = Symbol('MENU_SCORE');
+    
+    
+    
+    //////////////////
+    // Global State //
+    //////////////////
+    
+    const state = {
+        game: {
+            mode: GAME_MODE_RANKED,
+            // Run time of current game.
+            time: 0,
+            // Player score.
+            score: 0,
+            // Total number of cubes smashed in game.
+            cubeCount: 0
+        },
+        menus: {
+            // Set to `null` to hide all menus
+            active: MENU_MAIN
+        }
+    };
+    
+    
+    ////////////////////////////
+    // Global State Selectors //
+    ////////////////////////////
+    
+    const isInGame = () => !state.menus.active;
+    const isMenuVisible = () => !!state.menus.active;
+    const isCasualGame = () => state.game.mode === GAME_MODE_CASUAL;
+    const isPaused = () => state.menus.active === MENU_PAUSE;
+    
+    
+    ///////////////////
+    // Local Storage //
+    ///////////////////
+    
+    const highScoreKey = '__menja__highScore';
+    const getHighScore = () => {
+        const raw = localStorage.getItem(highScoreKey);
+        return raw ? parseInt(raw, 10) : 0;
+    };
+    const setHighScore = score => localStorage.setItem(highScoreKey, String(score))
+    
+    
+    
+    
+    // utils.js
+    // ============================================================================
+    // ============================================================================
+    
+    
+    const invariant = (condition, message) => {
+        if (!condition) throw new Error(message);
+    };
+    
+    
+    /////////
+    // DOM //
+    /////////
+    
+    const $ = selector => document.querySelector(selector);
+    const handleClick = (element, handler) => element.addEventListener('click', handler);
+    const handlePointerDown = (element, handler) => {
+        element.addEventListener('touchstart', handler);
+        element.addEventListener('mousedown', handler);
+    };
+    
+    
+    
+    ////////////////////////
+    // Formatting Helpers //
+    ////////////////////////
+    
+    // Converts a number into a formatted string with thousand separators.
+    const formatNumber = num => num.toLocaleString();
+    
+    
+    
+    ////////////////////
+    // Math Constants //
+    ////////////////////
+    
+    const PI = Math.PI;
+    const TAU = Math.PI * 2;
+    const ETA = Math.PI * 0.5;
+    
+    
+    
+    //////////////////
+    // Math Helpers //
+    //////////////////
+    
+    // Clamps a number between min and max values (inclusive)
+    const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+    
+    // Linearly interpolate between numbers a and b by a specific amount.
+    // mix >= 0 && mix <= 1
+    const lerp = (a, b, mix) => (b - a) * mix + a;
+    
+    
+    
+    
+    ////////////////////
+    // Random Helpers //
+    ////////////////////
+    
+    // Generates a random number between min (inclusive) and max (exclusive)
+    const random = (min, max) => Math.random() * (max - min) + min;
+    
+    // Generates a random integer between and possibly including min and max values
+    const randomInt = (min, max) => ((Math.random() * (max - min + 1)) | 0) + min;
+    
+    // Returns a random element from an array
+    const pickOne = arr => arr[Math.random() * arr.length | 0];
+    
+    
+    
+    
+    ///////////////////
+    // Color Helpers //
+    ///////////////////
+    
+    // Converts an { r, g, b } color object to a 6-digit hex code.
+    const colorToHex = color => {
+        return '#' +
+            (color.r | 0).toString(16).padStart(2, '0') +
+            (color.g | 0).toString(16).padStart(2, '0') +
+            (color.b | 0).toString(16).padStart(2, '0');
+    };
+    
+    // Operates on an { r, g, b } color object.
+    // Returns string hex code.
+    // `lightness` must range from 0 to 1. 0 is pure black, 1 is pure white.
+    const shadeColor = (color, lightness) => {
+        let other, mix;
+        if (lightness < 0.5) {
+            other = 0;
+            mix = 1 - (lightness * 2);
+        } else {
+            other = 255;
+            mix = lightness * 2 - 1;
+        }
+        return '#' +
+            (lerp(color.r, other, mix) | 0).toString(16).padStart(2, '0') +
+            (lerp(color.g, other, mix) | 0).toString(16).padStart(2, '0') +
+            (lerp(color.b, other, mix) | 0).toString(16).padStart(2, '0');
+    };
+    
+    
+    
+    
+    
+    ////////////////////
+    // Timing Helpers //
+    ////////////////////
+    
+    const _allCooldowns = [];
+    
+    const makeCooldown = (rechargeTime, units=1) => {
+        let timeRemaining = 0;
+        let lastTime = 0;
+    
+        const initialOptions = { rechargeTime, units };
+    
+        const updateTime = () => {
+            const now = state.game.time;
+            // Reset time remaining if time goes backwards.
+            if (now < lastTime) {
+                timeRemaining = 0;
+            } else {
+                // update...
+                timeRemaining -= now-lastTime;
+                if (timeRemaining < 0) timeRemaining = 0;
+            }
+            lastTime = now;
+        };
+    
+        const canUse = () => {
+            updateTime();
+            return timeRemaining <= (rechargeTime * (units-1));
+        };
+    
+        const cooldown = {
+            canUse,
+            useIfAble() {
+                const usable = canUse();
+                if (usable) timeRemaining += rechargeTime;
+                return usable;
+            },
+            mutate(options) {
+                if (options.rechargeTime) {
+                    // Apply recharge time delta so change takes effect immediately.
+                    timeRemaining -= rechargeTime-options.rechargeTime;
+                    if (timeRemaining < 0) timeRemaining = 0;
+                    rechargeTime = options.rechargeTime;
+                }
+                if (options.units) units = options.units;
+            },
+            reset() {
+                timeRemaining = 0;
+                lastTime = 0;
+                this.mutate(initialOptions);
+            }
+        };
+    
+        _allCooldowns.push(cooldown);
+    
+        return cooldown;
+    };
+    
+    const resetAllCooldowns = () => _allCooldowns.forEach(cooldown => cooldown.reset());
+    
+    const makeSpawner = ({ chance, cooldownPerSpawn, maxSpawns }) => {
+        const cooldown = makeCooldown(cooldownPerSpawn, maxSpawns);
+        return {
+            shouldSpawn() {
+                return Math.random() <= chance && cooldown.useIfAble();
+            },
+            mutate(options) {
+                if (options.chance) chance = options.chance;
+                cooldown.mutate({
+                    rechargeTime: options.cooldownPerSpawn,
+                    units: options.maxSpawns
+                });
+            }
+        };
+    };
+    
+    
+    
+    
+    ////////////////////
+    // Vector Helpers //
+    ////////////////////
+    
+    const normalize = v => {
+        const mag = Math.hypot(v.x, v.y, v.z);
+        return {
+            x: v.x / mag,
+            y: v.y / mag,
+            z: v.z / mag
+        };
+    }
+    
+    // Curried math helpers
+    const add = a => b => a + b;
+    // Curried vector helpers
+    const scaleVector = scale => vector => {
+        vector.x *= scale;
+        vector.y *= scale;
+        vector.z *= scale;
+    };
+    
+    
+    
+    
+    
+    
+    
+    
+    ////////////////
+    // 3D Helpers //
+    ////////////////
+    
+    // Clone array and all vertices.
+    function cloneVertices(vertices) {
+        return vertices.map(v => ({ x: v.x, y: v.y, z: v.z }));
+    }
+    
+    // Copy vertex data from one array into another.
+    // Arrays must be the same length.
+    function copyVerticesTo(arr1, arr2) {
+        const len = arr1.length;
+        for (let i=0; i<len; i++) {
+            const v1 = arr1[i];
+            const v2 = arr2[i];
+            v2.x = v1.x;
+            v2.y = v1.y;
+            v2.z = v1.z;
+        }
+    }
+    
+    // Compute triangle midpoint.
+    // Mutates `middle` property of given `poly`.
+    function computeTriMiddle(poly) {
+        const v = poly.vertices;
+        poly.middle.x = (v[0].x + v[1].x + v[2].x) / 3;
+        poly.middle.y = (v[0].y + v[1].y + v[2].y) / 3;
+        poly.middle.z = (v[0].z + v[1].z + v[2].z) / 3;
+    }
+    
+    // Compute quad midpoint.
+    // Mutates `middle` property of given `poly`.
+    function computeQuadMiddle(poly) {
+        const v = poly.vertices;
+        poly.middle.x = (v[0].x + v[1].x + v[2].x + v[3].x) / 4;
+        poly.middle.y = (v[0].y + v[1].y + v[2].y + v[3].y) / 4;
+        poly.middle.z = (v[0].z + v[1].z + v[2].z + v[3].z) / 4;
+    }
+    
+    function computePolyMiddle(poly) {
+        if (poly.vertices.length === 3) {
+            computeTriMiddle(poly);
+        } else {
+            computeQuadMiddle(poly);
+        }
+    }
+    
+    // Compute distance from any polygon (tri or quad) midpoint to camera.
+    // Sets `depth` property of given `poly`.
+    // Also triggers midpoint calculation, which mutates `middle` property of `poly`.
+    function computePolyDepth(poly) {
+        computePolyMiddle(poly);
+        const dX = poly.middle.x;
+        const dY = poly.middle.y;
+        const dZ = poly.middle.z - cameraDistance;
+        poly.depth = Math.hypot(dX, dY, dZ);
+    }
+    
+    // Compute normal of any polygon. Uses normalized vector cross product.
+    // Mutates `normalName` property of given `poly`.
+    function computePolyNormal(poly, normalName) {
+        // Store quick refs to vertices
+        const v1 = poly.vertices[0];
+        const v2 = poly.vertices[1];
+        const v3 = poly.vertices[2];
+        // Calculate difference of vertices, following winding order.
+        const ax = v1.x - v2.x;
+        const ay = v1.y - v2.y;
+        const az = v1.z - v2.z;
+        const bx = v1.x - v3.x;
+        const by = v1.y - v3.y;
+        const bz = v1.z - v3.z;
+        // Cross product
+        const nx = ay*bz - az*by;
+        const ny = az*bx - ax*bz;
+        const nz = ax*by - ay*bx;
+        // Compute magnitude of normal and normalize
+        const mag = Math.hypot(nx, ny, nz);
+        const polyNormal = poly[normalName];
+        polyNormal.x = nx / mag;
+        polyNormal.y = ny / mag;
+        polyNormal.z = nz / mag;
+    }
+    
+    // Apply translation/rotation/scale to all given vertices.
+    // If `vertices` and `target` are the same array, the vertices will be mutated in place.
+    // If `vertices` and `target` are different arrays, `vertices` will not be touched, instead the
+    // transformed values from `vertices` will be written to `target` array.
+    function transformVertices(vertices, target, tX, tY, tZ, rX, rY, rZ, sX, sY, sZ) {
+        // Matrix multiplcation constants only need calculated once for all vertices.
+        const sinX = Math.sin(rX);
+        const cosX = Math.cos(rX);
+        const sinY = Math.sin(rY);
+        const cosY = Math.cos(rY);
+        const sinZ = Math.sin(rZ);
+        const cosZ = Math.cos(rZ);
+    
+        // Using forEach() like map(), but with a (recycled) target array.
+        vertices.forEach((v, i) => {
+            const targetVertex = target[i];
+            // X axis rotation
+            const x1 = v.x;
+            const y1 = v.z*sinX + v.y*cosX;
+            const z1 = v.z*cosX - v.y*sinX;
+            // Y axis rotation
+            const x2 = x1*cosY - z1*sinY;
+            const y2 = y1;
+            const z2 = x1*sinY + z1*cosY;
+            // Z axis rotation
+            const x3 = x2*cosZ - y2*sinZ;
+            const y3 = x2*sinZ + y2*cosZ;
+            const z3 = z2;
+    
+            // Scale, Translate, and set the transform.
+            targetVertex.x = x3 * sX + tX;
+            targetVertex.y = y3 * sY + tY;
+            targetVertex.z = z3 * sZ + tZ;
+        });
+    }
+    
+    // 3D projection on a single vertex.
+    // Directly mutates the vertex.
+    const projectVertex = v => {
+        const focalLength = cameraDistance * sceneScale;
+        const depth = focalLength / (cameraDistance - v.z);
+        v.x = v.x * depth;
+        v.y = v.y * depth;
+    };
+    
+    // 3D projection on a single vertex.
+    // Mutates a secondary target vertex.
+    const projectVertexTo = (v, target) => {
+        const focalLength = cameraDistance * sceneScale;
+        const depth = focalLength / (cameraDistance - v.z);
+        target.x = v.x * depth;
+        target.y = v.y * depth;
+    };
+    
+    
+    
+    
+    
+    // PERF.js
+    // ============================================================================
+    // ============================================================================
+    
+    // Dummy no-op functions.
+    // I use these in a special build for custom performance profiling.
+    const PERF_START = () => {};
+    const PERF_END = () => {};
+    const PERF_UPDATE = () => {};
+    
+    
+    
+    
+    // 3dModels.js
+    // ============================================================================
+    // ============================================================================
+    
+    // Define models once. The origin is the center of the model.
+    
+    // A simple cube, 8 vertices, 6 quads.
+    // Defaults to an edge length of 2 units, can be influenced with `scale`.
+    function makeCubeModel({ scale=1 }) {
+        return {
+            vertices: [
+                // top
+                { x: -scale, y: -scale, z: scale },
+                { x:  scale, y: -scale, z: scale },
+                { x:  scale, y:  scale, z: scale },
+                { x: -scale, y:  scale, z: scale },
+                // bottom
+                { x: -scale, y: -scale, z: -scale },
+                { x:  scale, y: -scale, z: -scale },
+                { x:  scale, y:  scale, z: -scale },
+                { x: -scale, y:  scale, z: -scale }
+            ],
+            polys: [
+                // z = 1
+                { vIndexes: [0, 1, 2, 3] },
+                // z = -1
+                { vIndexes: [7, 6, 5, 4] },
+                // y = 1
+                { vIndexes: [3, 2, 6, 7] },
+                // y = -1
+                { vIndexes: [4, 5, 1, 0] },
+                // x = 1
+                { vIndexes: [5, 6, 2, 1] },
+                // x = -1
+                { vIndexes: [0, 3, 7, 4] }
+            ]
+        };
+    }
+    
+    // Not very optimized - lots of duplicate vertices are generated.
+    function makeRecursiveCubeModel({ recursionLevel, splitFn, color, scale=1 }) {
+        const getScaleAtLevel = level => 1 / (3 ** level);
+    
+        // We can model level 0 manually. It's just a single, centered, cube.
+        let cubeOrigins = [{ x: 0, y: 0, z: 0 }];
+    
+        // Recursively replace cubes with smaller cubes.
+        for (let i=1; i<=recursionLevel; i++) {
+            const scale = getScaleAtLevel(i) * 2;
+            const cubeOrigins2 = [];
+            cubeOrigins.forEach(origin => {
+                cubeOrigins2.push(...splitFn(origin, scale));
+            });
+            cubeOrigins = cubeOrigins2;
+        }
+    
+        const finalModel = { vertices: [], polys: [] };
+    
+        // Generate single cube model and scale it.
+        const cubeModel = makeCubeModel({ scale: 1 });
+        cubeModel.vertices.forEach(scaleVector(getScaleAtLevel(recursionLevel)));
+    
+        // Compute the max distance x, y, or z origin values will be.
+        // Same result as `Math.max(...cubeOrigins.map(o => o.x))`, but much faster.
+        const maxComponent = getScaleAtLevel(recursionLevel) * (3 ** recursionLevel - 1);
+    
+        // Place cube geometry at each origin.
+        cubeOrigins.forEach((origin, cubeIndex) => {
+            // To compute occlusion (shading), find origin component with greatest
+            // magnitude and normalize it relative to `maxComponent`.
+            const occlusion = Math.max(
+                Math.abs(origin.x),
+                Math.abs(origin.y),
+                Math.abs(origin.z)
+            ) / maxComponent;
+            // At lower iterations, occlusion looks better lightened up a bit.
+            const occlusionLighter = recursionLevel > 2
+                ? occlusion
+                : (occlusion + 0.8) / 1.8;
+            // Clone, translate vertices to origin, and apply scale
+            finalModel.vertices.push(
+                ...cubeModel.vertices.map(v => ({
+                    x: (v.x + origin.x) * scale,
+                    y: (v.y + origin.y) * scale,
+                    z: (v.z + origin.z) * scale
+                }))
+            );
+            // Clone polys, shift referenced vertex indexes, and compute color.
+            finalModel.polys.push(
+                ...cubeModel.polys.map(poly => ({
+                    vIndexes: poly.vIndexes.map(add(cubeIndex * 8))
+                }))
+            );
+        });
+    
+        return finalModel;
+    }
+    
+    
+    // o: Vector3D - Position of cube's origin (center).
+    // s: Vector3D - Determines size of menger sponge.
+    function mengerSpongeSplit(o, s) {
+        return [
+            // Top
+            { x: o.x + s, y: o.y - s, z: o.z + s },
+            { x: o.x + s, y: o.y - s, z: o.z + 0 },
+            { x: o.x + s, y: o.y - s, z: o.z - s },
+            { x: o.x + 0, y: o.y - s, z: o.z + s },
+            { x: o.x + 0, y: o.y - s, z: o.z - s },
+            { x: o.x - s, y: o.y - s, z: o.z + s },
+            { x: o.x - s, y: o.y - s, z: o.z + 0 },
+            { x: o.x - s, y: o.y - s, z: o.z - s },
+            // Bottom
+            { x: o.x + s, y: o.y + s, z: o.z + s },
+            { x: o.x + s, y: o.y + s, z: o.z + 0 },
+            { x: o.x + s, y: o.y + s, z: o.z - s },
+            { x: o.x + 0, y: o.y + s, z: o.z + s },
+            { x: o.x + 0, y: o.y + s, z: o.z - s },
+            { x: o.x - s, y: o.y + s, z: o.z + s },
+            { x: o.x - s, y: o.y + s, z: o.z + 0 },
+            { x: o.x - s, y: o.y + s, z: o.z - s },
+            // Middle
+            { x: o.x + s, y: o.y + 0, z: o.z + s },
+            { x: o.x + s, y: o.y + 0, z: o.z - s },
+            { x: o.x - s, y: o.y + 0, z: o.z + s },
+            { x: o.x - s, y: o.y + 0, z: o.z - s }
+        ];
+    }
+    
+    
+    
+    // Helper to optimize models by merging duplicate vertices within a threshold,
+    // and removing all polys that share the same vertices.
+    // Directly mutates the model.
+    function optimizeModel(model, threshold=0.0001) {
+        const { vertices, polys } = model;
+    
+        const compareVertices = (v1, v2) => (
+            Math.abs(v1.x - v2.x) < threshold &&
+            Math.abs(v1.y - v2.y) < threshold &&
+            Math.abs(v1.z - v2.z) < threshold
+        );
+    
+        const comparePolys = (p1, p2) => {
+            const v1 = p1.vIndexes;
+            const v2 = p2.vIndexes;
+            return (
+                (
+                    v1[0] === v2[0] ||
+                    v1[0] === v2[1] ||
+                    v1[0] === v2[2] ||
+                    v1[0] === v2[3]
+                ) && (
+                    v1[1] === v2[0] ||
+                    v1[1] === v2[1] ||
+                    v1[1] === v2[2] ||
+                    v1[1] === v2[3]
+                ) && (
+                    v1[2] === v2[0] ||
+                    v1[2] === v2[1] ||
+                    v1[2] === v2[2] ||
+                    v1[2] === v2[3]
+                ) && (
+                    v1[3] === v2[0] ||
+                    v1[3] === v2[1] ||
+                    v1[3] === v2[2] ||
+                    v1[3] === v2[3]
+                )
+            );
+        };
+    
+    
+        vertices.forEach((v, i) => {
+            v.originalIndexes = [i];
+        });
+    
+        for (let i=vertices.length-1; i>=0; i--) {
+            for (let ii=i-1; ii>=0; ii--) {
+                const v1 = vertices[i];
+                const v2 = vertices[ii];
+                if (compareVertices(v1, v2)) {
+                    vertices.splice(i, 1);
+                    v2.originalIndexes.push(...v1.originalIndexes);
+                    break;
+                }
+            }
+        }
+    
+        vertices.forEach((v, i) => {
+            polys.forEach(p => {
+                p.vIndexes.forEach((vi, ii, arr) => {
+                    const vo = v.originalIndexes;
+                    if (vo.includes(vi)) {
+                        arr[ii] = i;
+                    }
+                });
+            });
+        });
+    
+        polys.forEach(p => {
+            const vi = p.vIndexes;
+            p.sum = vi[0] + vi[1] + vi[2] + vi[3];
+        });
+        polys.sort((a, b) => b.sum - a.sum);
+    
+        // Assumptions:
+        // 1. Each poly will either have no duplicates or 1 duplicate.
+        // 2. If two polys are equal, they are both hidden (two cubes touching),
+        //    therefore both can be removed.
+        for (let i=polys.length-1; i>=0; i--) {
+            for (let ii=i-1; ii>=0; ii--) {
+                const p1 = polys[i];
+                const p2 = polys[ii];
+                if (p1.sum !== p2.sum) break;
+                if (comparePolys(p1, p2)) {
+                    polys.splice(i, 1);
+                    polys.splice(ii, 1);
+                    i--;
+                    break;
+                }
+            }
+        }
+    
+        return model;
+    }
+    
+    
+    
+    
+    
+    // Entity.js
+    // ============================================================================
+    // ============================================================================
+    
+    class Entity {
+        constructor({ model, color, wireframe=false }) {
+            const vertices = cloneVertices(model.vertices);
+            const shadowVertices = cloneVertices(model.vertices);
+            const colorHex = colorToHex(color);
+            const darkColorHex = shadeColor(color, 0.4);
+    
+            const polys = model.polys.map(p => ({
+                vertices: p.vIndexes.map(vIndex => vertices[vIndex]),
+                color: color, // custom rgb color object
+                wireframe: wireframe,
+                strokeWidth: wireframe ? 2 : 0, // Set to non-zero value to draw stroke
+                strokeColor: colorHex, // must be a CSS color string
+                strokeColorDark: darkColorHex, // must be a CSS color string
+                depth: 0,
+                middle: { x: 0, y: 0, z: 0 },
+                normalWorld: { x: 0, y: 0, z: 0 },
+                normalCamera: { x: 0, y: 0, z: 0 }
+            }));
+    
+            const shadowPolys = model.polys.map(p => ({
+                vertices: p.vIndexes.map(vIndex => shadowVertices[vIndex]),
+                wireframe: wireframe,
+                normalWorld: { x: 0, y: 0, z: 0 }
+            }));
+    
+            this.projected = {}; // Will store 2D projected data
+            this.model = model;
+            this.vertices = vertices;
+            this.polys = polys;
+            this.shadowVertices = shadowVertices;
+            this.shadowPolys = shadowPolys;
+            this.reset();
+        }
+    
+        // Better names: resetEntity, resetTransform, resetEntityTransform
+        reset() {
+            this.x = 0;
+            this.y = 0;
+            this.z = 0;
+            this.xD = 0;
+            this.yD = 0;
+            this.zD = 0;
+    
+            this.rotateX = 0;
+            this.rotateY = 0;
+            this.rotateZ = 0;
+            this.rotateXD = 0;
+            this.rotateYD = 0;
+            this.rotateZD = 0;
+    
+            this.scaleX = 1;
+            this.scaleY = 1;
+            this.scaleZ = 1;
+    
+            this.projected.x = 0;
+            this.projected.y = 0;
+        }
+    
+        transform() {
+            transformVertices(
+                this.model.vertices,
+                this.vertices,
+                this.x,
+                this.y,
+                this.z,
+                this.rotateX,
+                this.rotateY,
+                this.rotateZ,
+                this.scaleX,
+                this.scaleY,
+                this.scaleZ
+            );
+    
+            copyVerticesTo(this.vertices, this.shadowVertices);
+        }
+    
+        // Projects origin point, stored as `projected` property.
+        project() {
+            projectVertexTo(this, this.projected);
+        }
+    }
+    
+    
+    
+    
+    
+    // getTarget.js
+    // ============================================================================
+    // ============================================================================
+    
+    // All active targets
+    const targets = [];
+    
+    // Pool target instances by color, using a Map.
+    // keys are color objects, and values are arrays of targets.
+    // Also pool wireframe instances separately.
+    const targetPool = new Map(allColors.map(c=>([c, []])));
+    const targetWireframePool = new Map(allColors.map(c=>([c, []])));
+    
+    
+    
+    const getTarget = (() => {
+    
+        const slowmoSpawner = makeSpawner({
+            chance: 0.5,
+            cooldownPerSpawn: 10000,
+            maxSpawns: 1
+        });
+    
+        let doubleStrong = false;
+        const strongSpawner = makeSpawner({
+            chance: 0.3,
+            cooldownPerSpawn: 12000,
+            maxSpawns: 1
+        });
+    
+        const spinnerSpawner = makeSpawner({
+            chance: 0.1,
+            cooldownPerSpawn: 10000,
+            maxSpawns: 1
+        });
+    
+        // Cached array instances, no need to allocate every time.
+        const axisOptions = [
+            ['x', 'y'],
+            ['y', 'z'],
+            ['z', 'x']
+        ];
+    
+        function getTargetOfStyle(color, wireframe) {
+            const pool = wireframe ? targetWireframePool : targetPool;
+            let target = pool.get(color).pop();
+            if (!target) {
+                target = new Entity({
+                    model: optimizeModel(makeRecursiveCubeModel({
+                        recursionLevel: 1,
+                        splitFn: mengerSpongeSplit,
+                        scale: targetRadius
+                    })),
+                    color: color,
+                    wireframe: wireframe
+                });
+    
+                // Init any properties that will be used.
+                // These will not be automatically reset when recycled.
+                target.color = color;
+                target.wireframe = wireframe;
+                // Some properties don't have their final value yet.
+                // Initialize with any value of the right type.
+                target.hit = false;
+                target.maxHealth = 0;
+                target.health = 0;
+            }
+            return target;
+        }
+    
+        return function getTarget() {
+            if (doubleStrong && state.game.score <= doubleStrongEnableScore) {
+                doubleStrong = false;
+                // Spawner is reset automatically when game resets.
+            } else if (!doubleStrong && state.game.score > doubleStrongEnableScore) {
+                doubleStrong = true;
+                strongSpawner.mutate({ maxSpawns: 2 });
+            }
+    
+            // Target Parameters
+            // --------------------------------
+            let color = pickOne([BLUE, GREEN, ORANGE]);
+            let wireframe = false;
+            let health = 1;
+            let maxHealth = 3;
+            const spinner = state.game.cubeCount >= spinnerThreshold && isInGame() && spinnerSpawner.shouldSpawn();
+    
+            // Target Parameter Overrides
+            // --------------------------------
+            if (state.game.cubeCount >= slowmoThreshold && slowmoSpawner.shouldSpawn()) {
+                color = BLUE;
+                wireframe = true;
+            }
+            else if (state.game.cubeCount >= strongThreshold && strongSpawner.shouldSpawn()) {
+                color = PINK;
+                health = 3;
+            }
+    
+            // Target Creation
+            // --------------------------------
+            const target = getTargetOfStyle(color, wireframe);
+            target.hit = false;
+            target.maxHealth = maxHealth;
+            target.health = health;
+            updateTargetHealth(target, 0);
+    
+            const spinSpeeds = [
+                Math.random() * 0.1 - 0.05,
+                Math.random() * 0.1 - 0.05
+            ];
+    
+            if (spinner) {
+                // Ends up spinning a random axis
+                spinSpeeds[0] = -0.25;
+                spinSpeeds[1] = 0;
+                target.rotateZ = random(0, TAU);
+            }
+    
+            const axes = pickOne(axisOptions);
+    
+            spinSpeeds.forEach((spinSpeed, i) => {
+                switch (axes[i]) {
+                    case 'x':
+                        target.rotateXD = spinSpeed;
+                        break;
+                    case 'y':
+                        target.rotateYD = spinSpeed;
+                        break;
+                    case 'z':
+                        target.rotateZD = spinSpeed;
+                        break;
+                }
+            });
+    
+            return target;
+        }
+    })();
+    
+    
+    const updateTargetHealth = (target, healthDelta) => {
+        target.health += healthDelta;
+        // Only update stroke on non-wireframe targets.
+        // Showing "glue" is a temporary attempt to display health. For now, there's
+        // no reason to have wireframe targets with high health, so we're fine.
+        if (!target.wireframe) {
+            const strokeWidth = target.health - 1;
+            const strokeColor = makeTargetGlueColor(target);
+            for (let p of target.polys) {
+                p.strokeWidth = strokeWidth;
+                p.strokeColor = strokeColor;
+            }
+        }
+    };
+    
+    
+    const returnTarget = target => {
+        target.reset();
+        const pool = target.wireframe ? targetWireframePool : targetPool;
+        pool.get(target.color).push(target);
+    };
+    
+    
+    function resetAllTargets() {
+        while(targets.length) {
+            returnTarget(targets.pop());
+        }
+    }
+    
+    
+    
+    
+    
+    // createBurst.js
+    // ============================================================================
+    // ============================================================================
+    
+    // Track all active fragments
+    const frags = [];
+    // Pool inactive fragments by color, using a Map.
+    // keys are color objects, and values are arrays of fragments.
+    // // Also pool wireframe instances separately.
+    const fragPool = new Map(allColors.map(c=>([c, []])));
+    const fragWireframePool = new Map(allColors.map(c=>([c, []])));
+    
+    
+    const createBurst = (() => {
+        // Precompute some private data to be reused for all bursts.
+        const basePositions = mengerSpongeSplit({ x:0, y:0, z:0 }, fragRadius*2);
+        const positions = cloneVertices(basePositions);
+        const prevPositions = cloneVertices(basePositions);
+        const velocities = cloneVertices(basePositions);
+    
+        const basePositionNormals = basePositions.map(normalize);
+        const positionNormals = cloneVertices(basePositionNormals);
+    
+    
+        const fragCount = basePositions.length;
+    
+        function getFragForTarget(target) {
+            const pool = target.wireframe ? fragWireframePool : fragPool;
+            let frag = pool.get(target.color).pop();
+            if (!frag) {
+                frag = new Entity({
+                    model: makeCubeModel({ scale: fragRadius }),
+                    color: target.color,
+                    wireframe: target.wireframe
+                });
+                frag.color = target.color;
+                frag.wireframe = target.wireframe;
+            }
+            return frag;
+        }
+    
+        return (target, force=1) => {
+            // Calculate fragment positions, and what would have been the previous positions
+            // when still a part of the larger target.
+            transformVertices(
+                basePositions, positions,
+                target.x, target.y, target.z,
+                target.rotateX, target.rotateY, target.rotateZ,
+                1, 1, 1
+            );
+            transformVertices(
+                basePositions, prevPositions,
+                target.x - target.xD, target.y - target.yD, target.z - target.zD,
+                target.rotateX - target.rotateXD, target.rotateY - target.rotateYD, target.rotateZ - target.rotateZD,
+                1, 1, 1
+            );
+    
+            // Compute velocity of each fragment, based on previous positions.
+            // Will write to `velocities` array.
+            for (let i=0; i<fragCount; i++) {
+                const position = positions[i];
+                const prevPosition = prevPositions[i];
+                const velocity = velocities[i];
+    
+                velocity.x = position.x - prevPosition.x;
+                velocity.y = position.y - prevPosition.y;
+                velocity.z = position.z - prevPosition.z;
+            }
+    
+    
+    
+            // Apply target rotation to normals
+            transformVertices(
+                basePositionNormals, positionNormals,
+                0, 0, 0,
+                target.rotateX, target.rotateY, target.rotateZ,
+                1, 1, 1
+            );
+    
+    
+            for (let i=0; i<fragCount; i++) {
+                const position = positions[i];
+                const velocity = velocities[i];
+                const normal = positionNormals[i];
+    
+                const frag = getFragForTarget(target);
+    
+                frag.x = position.x;
+                frag.y = position.y;
+                frag.z = position.z;
+                frag.rotateX = target.rotateX;
+                frag.rotateY = target.rotateY;
+                frag.rotateZ = target.rotateZ;
+    
+    
+                const burstSpeed = 2 * force;
+                const randSpeed = 2 * force;
+                const rotateScale = 0.015;
+                frag.xD = velocity.x + (normal.x * burstSpeed) + (Math.random() * randSpeed);
+                frag.yD = velocity.y + (normal.y * burstSpeed) + (Math.random() * randSpeed);
+                frag.zD = velocity.z + (normal.z * burstSpeed) + (Math.random() * randSpeed);
+                frag.rotateXD = frag.xD * rotateScale;
+                frag.rotateYD = frag.yD * rotateScale;
+                frag.rotateZD = frag.zD * rotateScale;
+    
+                frags.push(frag);
+            };
+        }
+    })();
+    
+    
+    const returnFrag = frag => {
+        frag.reset();
+        const pool = frag.wireframe ? fragWireframePool : fragPool;
+        pool.get(frag.color).push(frag);
+    };
+    
+    
+    
+    
+    
+    // sparks.js
+    // ============================================================================
+    // ============================================================================
+    
+    const sparks = [];
+    const sparkPool = [];
+    
+    
+    function addSpark(x, y, xD, yD) {
+        const spark = sparkPool.pop() || {};
+    
+        spark.x = x + xD * 0.5;
+        spark.y = y + yD * 0.5;
+        spark.xD = xD;
+        spark.yD = yD;
+        spark.life = random(200, 300);
+        spark.maxLife = spark.life;
+    
+        sparks.push(spark);
+    
+        return spark;
+    }
+    
+    
+    // Spherical spark burst
+    function sparkBurst(x, y, count, maxSpeed) {
+        const angleInc = TAU / count;
+        for (let i=0; i<count; i++) {
+            const angle = i * angleInc + angleInc * Math.random();
+            const speed = (1 - Math.random() ** 3) * maxSpeed;
+            addSpark(
+                x,
+                y,
+                Math.sin(angle) * speed,
+                Math.cos(angle) * speed
+            );
+        }
+    }
+    
+    
+    // Make a target "leak" sparks from all vertices.
+    // This is used to create the effect of target glue "shedding".
+    let glueShedVertices;
+    function glueShedSparks(target) {
+        if (!glueShedVertices) {
+            glueShedVertices = cloneVertices(target.vertices);
+        } else {
+            copyVerticesTo(target.vertices, glueShedVertices);
+        }
+    
+        glueShedVertices.forEach(v => {
+            if (Math.random() < 0.4) {
+                projectVertex(v);
+                addSpark(
+                    v.x,
+                    v.y,
+                    random(-12, 12),
+                    random(-12, 12)
+                );
+            }
+        });
+    }
+    
+    function returnSpark(spark) {
+        sparkPool.push(spark);
+    }
+    
+    
+    
+    
+    
+    // hud.js
+    // ============================================================================
+    // ============================================================================
+    
+    const hudContainerNode = $('.hud');
+    
+    function setHudVisibility(visible) {
+        if (visible) {
+            hudContainerNode.style.display = 'block';
+        } else {
+            hudContainerNode.style.display = 'none';
+        }
+    }
+    
+    
+    ///////////
+    // Score //
+    ///////////
+    const scoreNode = $('.score-lbl');
+    const cubeCountNode = $('.cube-count-lbl');
+    
+    function renderScoreHud() {
+        if (isCasualGame()) {
+            scoreNode.style.display = 'none';
+            cubeCountNode.style.opacity = 1;
+        } else {
+            scoreNode.innerText = `SCORE: ${state.game.score}`;
+            scoreNode.style.display = 'block';
+            cubeCountNode.style.opacity = 0.65 ;
+        }
+        cubeCountNode.innerText = `CUBES SMASHED: ${state.game.cubeCount}`;
+    }
+    
+    renderScoreHud();
+    
+    
+    //////////////////
+    // Pause Button //
+    //////////////////
+    
+    handlePointerDown($('.pause-btn'), () => pauseGame());
+    
+    
+    ////////////////////
+    // Slow-Mo Status //
+    ////////////////////
+    
+    const slowmoNode = $('.slowmo');
+    const slowmoBarNode = $('.slowmo__bar');
+    
+    function renderSlowmoStatus(percentRemaining) {
+        slowmoNode.style.opacity = percentRemaining === 0 ? 0 : 1;
+        slowmoBarNode.style.transform = `scaleX(${percentRemaining.toFixed(3)})`;
+    }
+    
+    
+    
+    
+    
+    // menus.js
+    // ============================================================================
+    // ============================================================================
+    
+    // Top-level menu containers
+    const menuContainerNode = $('.menus');
+    const menuMainNode = $('.menu--main');
+    const menuPauseNode = $('.menu--pause');
+    const menuScoreNode = $('.menu--score');
+    
+    const finalScoreLblNode = $('.final-score-lbl');
+    const highScoreLblNode = $('.high-score-lbl');
+    
+    
+    
+    function showMenu(node) {
+        node.classList.add('active');
+    }
+    
+    function hideMenu(node) {
+        node.classList.remove('active');
+    }
+    
+    function renderMenus() {
+        hideMenu(menuMainNode);
+        hideMenu(menuPauseNode);
+        hideMenu(menuScoreNode);
+    
+        switch (state.menus.active) {
+            case MENU_MAIN:
+                showMenu(menuMainNode);
+                break;
+            case MENU_PAUSE:
+                showMenu(menuPauseNode);
+                break;
+            case MENU_SCORE:
+                finalScoreLblNode.textContent = formatNumber(state.game.score);
+                if (state.game.score > getHighScore()) {
+                    highScoreLblNode.textContent = 'New High Score!';
+                } else {
+                    highScoreLblNode.textContent = `High Score: ${formatNumber(getHighScore())}`;
+                }
+                showMenu(menuScoreNode);
+                break;
+        }
+    
+        setHudVisibility(!isMenuVisible());
+        menuContainerNode.classList.toggle('has-active', isMenuVisible());
+        menuContainerNode.classList.toggle('interactive-mode', isMenuVisible() && pointerIsDown);
+    }
+    
+    renderMenus();
+    
+    
+    
+    ////////////////////
+    // Button Actions //
+    ////////////////////
+    
+    // Main Menu
+    handleClick($('.play-normal-btn'), () => {
+        setGameMode(GAME_MODE_RANKED);
+        setActiveMenu(null);
+        resetGame();
+    });
+    
+    handleClick($('.play-casual-btn'), () => {
+        setGameMode(GAME_MODE_CASUAL);
+        setActiveMenu(null);
+        resetGame();
+    });
+    
+    // Pause Menu
+    handleClick($('.resume-btn'), () => resumeGame());
+    handleClick($('.menu-btn--pause'), () => setActiveMenu(MENU_MAIN));
+    
+    // Score Menu
+    handleClick($('.play-again-btn'), () => {
+        setActiveMenu(null);
+        resetGame();
+    });
+    
+    handleClick($('.menu-btn--score'), () => setActiveMenu(MENU_MAIN));
+    
+    
+    
+    
+    
+    // actions.js
+    // ============================================================================
+    // ============================================================================
+    
+    //////////////////
+    // MENU ACTIONS //
+    //////////////////
+    
+    function setActiveMenu(menu) {
+        state.menus.active = menu;
+        renderMenus();
+    }
+    
+    
+    /////////////////
+    // HUD ACTIONS //
+    /////////////////
+    
+    function setScore(score) {
+        state.game.score = score;
+        renderScoreHud();
+    }
+    
+    function incrementScore(inc) {
+        if (isInGame()) {
+            state.game.score += inc;
+            if (state.game.score < 0) {
+                state.game.score = 0;
+            }
+            renderScoreHud();
+        }
+    }
+    
+    function setCubeCount(count) {
+        state.game.cubeCount = count;
+        renderScoreHud();
+    }
+    
+    function incrementCubeCount(inc) {
+        if (isInGame()) {
+            state.game.cubeCount += inc;
+            renderScoreHud();
+        }
+    }
+    
+    
+    //////////////////
+    // GAME ACTIONS //
+    //////////////////
+    
+    function setGameMode(mode) {
+        state.game.mode = mode;
+    }
+    
+    function resetGame() {
+        resetAllTargets();
+        state.game.time = 0;
+        resetAllCooldowns();
+        setScore(0);
+        setCubeCount(0);
+        spawnTime = getSpawnDelay();
+    }
+    
+    function pauseGame() {
+        isInGame() && setActiveMenu(MENU_PAUSE);
+    }
+    
+    function resumeGame() {
+        isPaused() && setActiveMenu(null);
+    }
+    
+    function endGame() {
+        setActiveMenu(MENU_SCORE);
+        handleCanvasPointerUp();
+        // Update high score if needed, AFTER rendering the score menu.
+        if (state.game.score > getHighScore()) {
+            setHighScore(state.game.score);
+        }
+    }
+    
+    
+    
+    
+    ////////////////////////
+    // KEYBOARD SHORTCUTS //
+    ////////////////////////
+    
+    window.addEventListener('keydown', event => {
+        if (event.key === 'p') {
+            isPaused() ? resumeGame() : pauseGame();
+        }
+    });
+    
+    
+    
+    
+    
+    // tick.js
+    // ============================================================================
+    // ============================================================================
+    
+    
+    let spawnTime = 0;
+    const maxSpawnX = 450;
+    const pointerDelta = { x: 0, y: 0 };
+    const pointerDeltaScaled = { x: 0, y: 0 };
+    
+    // Temp slowmo state. Should be relocated once this stabilizes.
+    const slowmoDuration = 1500;
+    let slowmoRemaining = 0;
+    let spawnExtra = 0;
+    const spawnExtraDelay = 300;
+    let targetSpeed = 1;
+    
+    
+    function tick(width, height, simTime, simSpeed, lag) {
+        PERF_START('frame');
+        PERF_START('tick');
+    
+        state.game.time += simTime;
+    
+        if (slowmoRemaining > 0) {
+            slowmoRemaining -= simTime;
+            if (slowmoRemaining < 0) {
+                slowmoRemaining = 0;
+            }
+            targetSpeed = pointerIsDown ? 0.075 : 0.3;
+        } else {
+            const menuPointerDown = isMenuVisible() && pointerIsDown;
+            targetSpeed = menuPointerDown ? 0.025 : 1;
+        }
+    
+        renderSlowmoStatus(slowmoRemaining / slowmoDuration);
+    
+        gameSpeed += (targetSpeed - gameSpeed) / 22 * lag;
+        gameSpeed = clamp(gameSpeed, 0, 1);
+    
+        const centerX = width / 2;
+        const centerY = height / 2;
+    
+        const simAirDrag = 1 - (airDrag * simSpeed);
+        const simAirDragSpark = 1 - (airDragSpark * simSpeed);
+    
+        // Pointer Tracking
+        // -------------------
+    
+        // Compute speed and x/y deltas.
+        // There is also a "scaled" variant taking game speed into account. This serves two purposes:
+        //  - Lag won't create large spikes in speed/deltas
+        //  - In slow mo, speed is increased proportionately to match "reality". Without this boost,
+        //    it feels like your actions are dampened in slow mo.
+        const forceMultiplier = 1 / (simSpeed * 0.75 + 0.25);
+        pointerDelta.x = 0;
+        pointerDelta.y = 0;
+        pointerDeltaScaled.x = 0;
+        pointerDeltaScaled.y = 0;
+        const lastPointer = touchPoints[touchPoints.length - 1];
+    
+        if (pointerIsDown && lastPointer && !lastPointer.touchBreak) {
+            pointerDelta.x = (pointerScene.x - lastPointer.x);
+            pointerDelta.y = (pointerScene.y - lastPointer.y);
+            pointerDeltaScaled.x = pointerDelta.x * forceMultiplier;
+            pointerDeltaScaled.y = pointerDelta.y * forceMultiplier;
+        }
+        const pointerSpeed = Math.hypot(pointerDelta.x, pointerDelta.y);
+        const pointerSpeedScaled = pointerSpeed * forceMultiplier;
+    
+        // Track points for later calculations, including drawing trail.
+        touchPoints.forEach(p => p.life -= simTime);
+    
+        if (pointerIsDown) {
+            touchPoints.push({
+                x: pointerScene.x,
+                y: pointerScene.y,
+                life: touchPointLife
+            });
+        }
+    
+        while (touchPoints[0] && touchPoints[0].life <= 0) {
+            touchPoints.shift();
+        }
+    
+    
+        // Entity Manipulation
+        // --------------------
+        PERF_START('entities');
+    
+        // Spawn targets
+        spawnTime -= simTime;
+        if (spawnTime <= 0) {
+            if (spawnExtra > 0) {
+                spawnExtra--;
+                spawnTime = spawnExtraDelay;
+            } else {
+                spawnTime = getSpawnDelay();
+            }
+            const target = getTarget();
+            const spawnRadius = Math.min(centerX * 0.8, maxSpawnX);
+            target.x = (Math.random() * spawnRadius * 2 - spawnRadius);
+            target.y = centerY + targetHitRadius;
+            target.z = (Math.random() * targetRadius*2 - targetRadius);
+            target.xD = Math.random() * (target.x * -2 / 120);
+            target.yD = -20;
+            targets.push(target);
+        }
+    
+        // Animate targets and remove when offscreen
+        const leftBound = -centerX + targetRadius;
+        const rightBound = centerX - targetRadius;
+        const ceiling = -centerY - 120;
+        const boundDamping = 0.4;
+    
+        targetLoop:
+        for (let i = targets.length - 1; i >= 0; i--) {
+            const target = targets[i];
+            target.x += target.xD * simSpeed;
+            target.y += target.yD * simSpeed;
+    
+            if (target.y < ceiling) {
+                target.y = ceiling;
+                target.yD = 0;
+            }
+    
+            if (target.x < leftBound) {
+                target.x = leftBound;
+                target.xD *= -boundDamping;
+            } else if (target.x > rightBound) {
+                target.x = rightBound;
+                target.xD *= -boundDamping;
+            }
+    
+            if (target.z < backboardZ) {
+                target.z = backboardZ;
+                target.zD *= -boundDamping;
+            }
+    
+            target.yD += gravity * simSpeed;
+            target.rotateX += target.rotateXD * simSpeed;
+            target.rotateY += target.rotateYD * simSpeed;
+            target.rotateZ += target.rotateZD * simSpeed;
+            target.transform();
+            target.project();
+    
+            // Remove if offscreen
+            if (target.projected.y > centerY + targetHitRadius * 2) {
+                targets.splice(i, 1);
+                returnTarget(target);
+                if (isInGame()) {
+                    if (isCasualGame()) {
+                        incrementScore(-25);
+                    } else {
+                        endGame();
+                    }
+                }
+                continue;
+            }
+    
+    
+            // If pointer is moving really fast, we want to hittest multiple points along the path.
+            // We can't use scaled pointer speed to determine this, since we care about actual screen
+            // distance covered.
+            const hitTestCount = Math.ceil(pointerSpeed / targetRadius * 2);
+            // Start loop at `1` and use `<=` check, so we skip 0% and end up at 100%.
+            // This omits the previous point position, and includes the most recent.
+            for (let ii=1; ii<=hitTestCount; ii++) {
+                const percent = 1 - (ii / hitTestCount);
+                const hitX = pointerScene.x - pointerDelta.x * percent;
+                const hitY = pointerScene.y - pointerDelta.y * percent;
+                const distance = Math.hypot(
+                    hitX - target.projected.x,
+                    hitY - target.projected.y
+                );
+    
+                if (distance <= targetHitRadius) {
+                    // Hit! (though we don't want to allow hits on multiple sequential frames)
+                    if (!target.hit) {
+                        target.hit = true;
+    
+                        target.xD += pointerDeltaScaled.x * hitDampening;
+                        target.yD += pointerDeltaScaled.y * hitDampening;
+                        target.rotateXD += pointerDeltaScaled.y * 0.001;
+                        target.rotateYD += pointerDeltaScaled.x * 0.001;
+    
+                        const sparkSpeed = 7 + pointerSpeedScaled * 0.125;
+    
+                        if (pointerSpeedScaled > minPointerSpeed) {
+                            target.health--;
+                            incrementScore(10);
+    
+                            if (target.health <= 0) {
+                                incrementCubeCount(1);
+                                createBurst(target, forceMultiplier);
+                                sparkBurst(hitX, hitY, 8, sparkSpeed);
+                                if (target.wireframe) {
+                                    slowmoRemaining = slowmoDuration;
+                                    spawnTime = 0;
+                                    spawnExtra = 2;
+                                }
+                                targets.splice(i, 1);
+                                returnTarget(target);
+                            } else {
+                                sparkBurst(hitX, hitY, 8, sparkSpeed);
+                                glueShedSparks(target);
+                                updateTargetHealth(target, 0);
+                            }
+                        } else {
+                            incrementScore(5);
+                            sparkBurst(hitX, hitY, 3, sparkSpeed);
+                        }
+                    }
+                    // Break the current loop and continue the outer loop.
+                    // This skips to processing the next target.
+                    continue targetLoop;
+                }
+            }
+    
+            // This code will only run if target hasn't been "hit".
+            target.hit = false;
+        }
+    
+        // Animate fragments and remove when offscreen.
+        const fragBackboardZ = backboardZ + fragRadius;
+        // Allow fragments to move off-screen to sides for a while, since shadows are still visible.
+        const fragLeftBound = -width;
+        const fragRightBound = width;
+    
+        for (let i = frags.length - 1; i >= 0; i--) {
+            const frag = frags[i];
+            frag.x += frag.xD * simSpeed;
+            frag.y += frag.yD * simSpeed;
+            frag.z += frag.zD * simSpeed;
+    
+            frag.xD *= simAirDrag;
+            frag.yD *= simAirDrag;
+            frag.zD *= simAirDrag;
+    
+            if (frag.y < ceiling) {
+                frag.y = ceiling;
+                frag.yD = 0;
+            }
+    
+            if (frag.z < fragBackboardZ) {
+                frag.z = fragBackboardZ;
+                frag.zD *= -boundDamping;
+            }
+    
+            frag.yD += gravity * simSpeed;
+            frag.rotateX += frag.rotateXD * simSpeed;
+            frag.rotateY += frag.rotateYD * simSpeed;
+            frag.rotateZ += frag.rotateZD * simSpeed;
+            frag.transform();
+            frag.project();
+    
+            // Removal conditions
+            if (
+                // Bottom of screen
+                frag.projected.y > centerY + targetHitRadius ||
+                // Sides of screen
+                frag.projected.x < fragLeftBound ||
+                frag.projected.x > fragRightBound ||
+                // Too close to camera
+                frag.z > cameraFadeEndZ
+            ) {
+                frags.splice(i, 1);
+                returnFrag(frag);
+                continue;
+            }
+        }
+    
+        // 2D sparks
+        for (let i = sparks.length - 1; i >= 0; i--) {
+            const spark = sparks[i];
+            spark.life -= simTime;
+            if (spark.life <= 0) {
+                sparks.splice(i, 1);
+                returnSpark(spark);
+                continue;
+            }
+            spark.x += spark.xD * simSpeed;
+            spark.y += spark.yD * simSpeed;
+            spark.xD *= simAirDragSpark;
+            spark.yD *= simAirDragSpark;
+            spark.yD += gravity * simSpeed;
+        }
+    
+        PERF_END('entities');
+    
+        // 3D transforms
+        // -------------------
+    
+        PERF_START('3D');
+    
+        // Aggregate all scene vertices/polys
+        allVertices.length = 0;
+        allPolys.length = 0;
+        allShadowVertices.length = 0;
+        allShadowPolys.length = 0;
+        targets.forEach(entity => {
+            allVertices.push(...entity.vertices);
+            allPolys.push(...entity.polys);
+            allShadowVertices.push(...entity.shadowVertices);
+            allShadowPolys.push(...entity.shadowPolys);
+        });
+    
+        frags.forEach(entity => {
+            allVertices.push(...entity.vertices);
+            allPolys.push(...entity.polys);
+            allShadowVertices.push(...entity.shadowVertices);
+            allShadowPolys.push(...entity.shadowPolys);
+        });
+    
+        // Scene calculations/transformations
+        allPolys.forEach(p => computePolyNormal(p, 'normalWorld'));
+        allPolys.forEach(computePolyDepth);
+        allPolys.sort((a, b) => b.depth - a.depth);
+    
+        // Perspective projection
+        allVertices.forEach(projectVertex);
+    
+        allPolys.forEach(p => computePolyNormal(p, 'normalCamera'));
+    
+        PERF_END('3D');
+    
+        PERF_START('shadows');
+    
+        // Rotate shadow vertices to light source perspective
+        transformVertices(
+            allShadowVertices,
+            allShadowVertices,
+            0, 0, 0,
+            TAU/8, 0, 0,
+            1, 1, 1
+        );
+    
+        allShadowPolys.forEach(p => computePolyNormal(p, 'normalWorld'));
+    
+        const shadowDistanceMult = Math.hypot(1, 1);
+        const shadowVerticesLength = allShadowVertices.length;
+        for (let i=0; i<shadowVerticesLength; i++) {
+            const distance = allVertices[i].z - backboardZ;
+            allShadowVertices[i].z -= shadowDistanceMult * distance;
+        }
+        transformVertices(
+            allShadowVertices,
+            allShadowVertices,
+            0, 0, 0,
+            -TAU/8, 0, 0,
+            1, 1, 1
+        );
+        allShadowVertices.forEach(projectVertex);
+    
+        PERF_END('shadows');
+    
+        PERF_END('tick');
+    }
+    
+    
+    
+    
+    
+    // draw.js
+    // ============================================================================
+    // ============================================================================
+    
+    function draw(ctx, width, height, viewScale) {
+        PERF_START('draw');
+    
+        const halfW = width / 2;
+        const halfH = height / 2;
+    
+    
+        // 3D Polys
+        // ---------------
+        ctx.lineJoin = 'bevel';
+    
+        PERF_START('drawShadows');
+        ctx.fillStyle = shadowColor;
+        ctx.strokeStyle = shadowColor;
+        allShadowPolys.forEach(p => {
+            if (p.wireframe) {
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                const { vertices } = p;
+                const vCount = vertices.length;
+                const firstV = vertices[0];
+                ctx.moveTo(firstV.x, firstV.y);
+                for (let i=1; i<vCount; i++) {
+                    const v = vertices[i];
+                    ctx.lineTo(v.x, v.y);
+                }
+                ctx.closePath();
+                ctx.stroke();
+            } else {
+                ctx.beginPath();
+                const { vertices } = p;
+                const vCount = vertices.length;
+                const firstV = vertices[0];
+                ctx.moveTo(firstV.x, firstV.y);
+                for (let i=1; i<vCount; i++) {
+                    const v = vertices[i];
+                    ctx.lineTo(v.x, v.y);
+                }
+                ctx.closePath();
+                ctx.fill();
+            }
+        });
+        PERF_END('drawShadows');
+    
+        PERF_START('drawPolys');
+    
+        allPolys.forEach(p => {
+            if (!p.wireframe && p.normalCamera.z < 0) return;
+    
+            if (p.strokeWidth !== 0) {
+                ctx.lineWidth = p.normalCamera.z < 0 ? p.strokeWidth * 0.5 : p.strokeWidth;
+                ctx.strokeStyle = p.normalCamera.z < 0 ? p.strokeColorDark : p.strokeColor;
+            }
+    
+            const { vertices } = p;
+            const lastV = vertices[vertices.length - 1];
+            const fadeOut = p.middle.z > cameraFadeStartZ;
+    
+            if (!p.wireframe) {
+                const normalLight = p.normalWorld.y * 0.5 + p.normalWorld.z * -0.5;
+                const lightness = normalLight > 0
+                    ? 0.1
+                    : ((normalLight ** 32 - normalLight) / 2) * 0.9 + 0.1;
+                ctx.fillStyle = shadeColor(p.color, lightness);
+            }
+    
+            // Fade out polys close to camera. `globalAlpha` must be reset later.
+            if (fadeOut) {
+                // If polygon gets really close to camera (outside `cameraFadeRange`) the alpha
+                // can go negative, which has the appearance of alpha = 1. So, we'll clamp it at 0.
+                ctx.globalAlpha = Math.max(0, 1 - (p.middle.z - cameraFadeStartZ) / cameraFadeRange);
+            }
+    
+            ctx.beginPath();
+            ctx.moveTo(lastV.x, lastV.y);
+            for (let v of vertices) {
+                ctx.lineTo(v.x, v.y);
+            }
+    
+            if (!p.wireframe) {
+                ctx.fill();
+            }
+            if (p.strokeWidth !== 0) {
+                ctx.stroke();
+            }
+    
+            if (fadeOut) {
+                ctx.globalAlpha = 1;
+            }
+        });
+        PERF_END('drawPolys');
+    
+    
+        PERF_START('draw2D');
+    
+        // 2D Sparks
+        // ---------------
+        ctx.strokeStyle = sparkColor;
+        ctx.lineWidth = sparkThickness;
+        ctx.beginPath();
+        sparks.forEach(spark => {
+            ctx.moveTo(spark.x, spark.y);
+            // Shrink sparks to zero length as they die.
+            // Speed up shrinking as life approaches 0 (root curve).
+            // Note that sparks already get smaller over time as their speed slows
+            // down from damping. So this is like a double scale down. To counter this
+            // a bit and keep the sparks larger for longer, we'll also increase the scale
+            // a bit after applying the root curve.
+            const scale = (spark.life / spark.maxLife) ** 0.5 * 1.5;
+            ctx.lineTo(spark.x - spark.xD*scale, spark.y - spark.yD*scale);
+    
+        });
+        ctx.stroke();
+    
+    
+        // Touch Strokes
+        // ---------------
+    
+        ctx.strokeStyle = touchTrailColor;
+        const touchPointCount = touchPoints.length;
+        for (let i=1; i<touchPointCount; i++) {
+            const current = touchPoints[i];
+            const prev = touchPoints[i-1];
+            if (current.touchBreak || prev.touchBreak) {
+                continue;
+            }
+            const scale = current.life / touchPointLife;
+            ctx.lineWidth = scale * touchTrailThickness;
+            ctx.beginPath();
+            ctx.moveTo(prev.x, prev.y);
+            ctx.lineTo(current.x, current.y);
+            ctx.stroke();
+        }
+    
+        PERF_END('draw2D');
+    
+        PERF_END('draw');
+        PERF_END('frame');
+    
+        // Display performance updates.
+        PERF_UPDATE();
+    }
+    
+    
+    
+    
+    
+    // canvas.js
+    // ============================================================================
+    // ============================================================================
+    
+    function setupCanvases() {
+        const ctx = canvas.getContext('2d');
+        // devicePixelRatio alias
+        const dpr = window.devicePixelRatio || 1;
+        // View will be scaled so objects appear sized similarly on all screen sizes.
+        let viewScale;
+        // Dimensions (taking viewScale into account!)
+        let width, height;
+    
+        function handleResize() {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            viewScale = h / 1000;
+            width = w / viewScale;
+            height = h / viewScale;
+            canvas.width = w * dpr;
+            canvas.height = h * dpr;
+            canvas.style.width = w + 'px';
+            canvas.style.height = h + 'px';
+        }
+    
+        // Set initial size
+        handleResize();
+        // resize fullscreen canvas
+        window.addEventListener('resize', handleResize);
+    
+    
+        // Run game loop
+        let lastTimestamp = 0;
+        function frameHandler(timestamp) {
+            let frameTime = timestamp - lastTimestamp;
+            lastTimestamp = timestamp;
+    
+            // always queue another frame
+            raf();
+    
+            // If game is paused, we'll still track frameTime (above) but all other
+            // game logic and drawing can be avoided.
+            if (isPaused()) return;
+    
+            // make sure negative time isn't reported (first frame can be whacky)
+            if (frameTime < 0) {
+                frameTime = 17;
+            }
+            // - cap minimum framerate to 15fps[~68ms] (assuming 60fps[~17ms] as 'normal')
+            else if (frameTime > 68) {
+                frameTime = 68;
+            }
+    
+            const halfW = width / 2;
+            const halfH = height / 2;
+    
+            // Convert pointer position from screen to scene coords.
+            pointerScene.x = pointerScreen.x / viewScale - halfW;
+            pointerScene.y = pointerScreen.y / viewScale - halfH;
+    
+            const lag = frameTime / 16.6667;
+            const simTime = gameSpeed * frameTime;
+            const simSpeed = gameSpeed * lag;
+            tick(width, height, simTime, simSpeed, lag);
+    
+            // Auto clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Auto scale drawing for high res displays, and incorporate `viewScale`.
+            // Also shift canvas so (0, 0) is the middle of the screen.
+            // This just works with 3D perspective projection.
+            const drawScale = dpr * viewScale;
+            ctx.scale(drawScale, drawScale);
+            ctx.translate(halfW, halfH);
+            draw(ctx, width, height, viewScale);
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+        }
+        const raf = () => requestAnimationFrame(frameHandler);
+        // Start loop
+        raf();
+    }
+    
+    
+    
+    
+    
+    // interaction.js
+    // ============================================================================
+    // ============================================================================
+    
+    // Interaction
+    // -----------------------------
+    
+    function handleCanvasPointerDown(x, y) {
+        if (!pointerIsDown) {
+            pointerIsDown = true;
+            pointerScreen.x = x;
+            pointerScreen.y = y;
+            // On when menus are open, point down/up toggles an interactive mode.
+            // We just need to rerender the menu system for it to respond.
+            if (isMenuVisible()) renderMenus();
+        }
+    }
+    
+    function handleCanvasPointerUp() {
+        if (pointerIsDown) {
+            pointerIsDown = false;
+            touchPoints.push({
+                touchBreak: true,
+                life: touchPointLife
+            });
+            // On when menus are open, point down/up toggles an interactive mode.
+            // We just need to rerender the menu system for it to respond.
+            if (isMenuVisible()) renderMenus();
+        }
+    }
+    
+    function handleCanvasPointerMove(x, y) {
+        if (pointerIsDown) {
+            pointerScreen.x = x;
+            pointerScreen.y = y;
+        }
+    }
+    
+    
+    // Use pointer events if available, otherwise fallback to touch events (for iOS).
+    if ('PointerEvent' in window) {
+        canvas.addEventListener('pointerdown', event => {
+            event.isPrimary && handleCanvasPointerDown(event.clientX, event.clientY);
+        });
+    
+        canvas.addEventListener('pointerup', event => {
+            event.isPrimary && handleCanvasPointerUp();
+        });
+    
+        canvas.addEventListener('pointermove', event => {
+            event.isPrimary && handleCanvasPointerMove(event.clientX, event.clientY);
+        });
+    
+        // We also need to know if the mouse leaves the page. For this game, it's best if that
+        // cancels a swipe, so essentially acts as a "mouseup" event.
+        document.body.addEventListener('mouseleave', handleCanvasPointerUp);
+    } else {
+        let activeTouchId = null;
+        canvas.addEventListener('touchstart', event => {
+            if (!pointerIsDown) {
+                const touch = event.changedTouches[0];
+                activeTouchId = touch.identifier;
+                handleCanvasPointerDown(touch.clientX, touch.clientY);
+            }
+        });
+        canvas.addEventListener('touchend', event => {
+            for (let touch of event.changedTouches) {
+                if (touch.identifier === activeTouchId) {
+                    handleCanvasPointerUp();
+                    break;
+                }
+            }
+        });
+        canvas.addEventListener('touchmove', event => {
+            for (let touch of event.changedTouches) {
+                if (touch.identifier === activeTouchId) {
+                    handleCanvasPointerMove(touch.clientX, touch.clientY);
+                    event.preventDefault();
+                    break;
+                }
+            }
+        }, { passive: false });
+    }
+    
+    
+    
+    
+    
+    // index.js
+    // ============================================================================
+    // ============================================================================
+    
+    setupCanvases();
+    </script>
+
+</body>
+</html>]]></content>
+  </entry>
+</search>
