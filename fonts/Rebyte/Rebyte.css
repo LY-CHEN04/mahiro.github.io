@@ -1,0 +1,6 @@
+@font-face {
+    font-family 'RebyteSansPro-Medium';
+    srclocal('RebyteSansPro-Medium'),
+        local('RebyteSansPro-Medium'),
+        url('RebyteSansPro-Medium.otf') format('opentype');
+}
