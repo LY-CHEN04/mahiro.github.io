@@ -699,7 +699,193 @@
   <entry>
     <title>Windows11系统初步设置与基础调试</title>
     <url>/2024/09/05/Windows11%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E8%B0%83%E8%AF%95/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="引入与准备阶段"><a href="#引入与准备阶段" class="headerlink" title="引入与准备阶段"></a>引入与准备阶段</h1><details class="orange" data-header-exclude><summary><i class="fa-solid fa-chevron-right"></i>购买阶段 </summary>
+              <div class='content'>
+              <p><strong>购入的渠道决定面临风险的程度，不要为了便宜去趟瑕疵重灾区的浑水。</strong><br><strong>如果购买渠道为“建议”中的选项，可以跳过该部分，前往<a href="https://ly-chen04.github.io/2024/09/05/Windows11%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E8%B0%83%E8%AF%95/#Windows11%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5%E8%AE%BE%E7%BD%AE">Windows11系统初步设置</a>。</strong><br><br></p><blockquote><p>建议：京东、天猫官网旗舰店、官方网站商城<br>不建议：所有第三方店铺、拼多多、抖音直播间</p></blockquote><ul><li>建议小白在购买之前和店铺客服确认产品配置与机器封装情况并保存聊天记录后再下单，有助于维护自身权益。</li><li>官方的硬盘或内存定制机型99%是拆封过的，不建议购买，不如自己后期加装硬盘。</li><li>要求卖家使用京东与顺丰快递（大不了就加钱），这两家的时效性很好也可以送货上门，不怎么会出现暴力运输的情况。</li><li>大多笔记本外包装上的封条经过特殊设计，撕下会留有特定印记，封条有问题直接退货。</li><li>不放心的也可以录制一个开箱视频，视频中要展示快递单号与包装全貌。</li></ul>
+              </div>
+            </details>
+
+<details class="green" data-header-exclude><summary><i class="fa-solid fa-chevron-right"></i>检验阶段 </summary>
+              <div class='content'>
+              <p><strong>需要着重注意一下几点</strong></p><ul><li>脚垫是否有灰尘或变形</li><li>背盖螺丝是否有松动或拆卸痕迹</li><li>机身及屏幕是否有指纹</li><li>接口处是否有划痕及掉漆</li></ul><p><strong>发现问题及时退货。</strong></p>
+              </div>
+            </details>
+
+<hr>
+<h1 id="Windows11系统初步设置"><a href="#Windows11系统初步设置" class="headerlink" title="Windows11系统初步设置"></a>Windows11系统初步设置</h1><h2 id="激活界面"><a href="#激活界面" class="headerlink" title="激活界面"></a>激活界面</h2>
+  <div class="note p-4 mb-4 rounded-small tip">
+    <p>电脑默认开启<strong>运输模式</strong>，首次开机需要接通电源。HP和机械革命是没有运输模式的。</p>
+
+  </div>
+<p>到达联网界面后不要进行联网操作，联网会自动激活，失去<strong>7天无理由退换货</strong>资格。<br>按下<code>Shift</code>+<code>F10</code>或者<code>Shift</code>+<code>Fn</code>+<code>F10</code>会弹出CMD窗口，输入以下代码回车，系统会自动重启</p>
+<blockquote>
+<p><code>oobe\BypassNRO.cmd</code></p>
+</blockquote>
+<p>这时再进入联网界面就会多出现一个 <code>我没有Internet连接</code> 的选项，并在下一个菜单选择 <code>继续执行受限操作</code> 即可跳过。</p>
+<p>隐私设置界面根据个人需要可以保留 <code>位置</code> 选项，其余选项都建议关闭。</p>
+<h2 id="Windows设置"><a href="#Windows设置" class="headerlink" title="Windows设置"></a>Windows设置</h2><h2 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h2>
+  <div class="note p-4 mb-4 rounded-small tip">
+    <p>按下 <code>Win</code>+<code>i</code> 可以快速打开Windows设置；<br>因个体审美与需求差异，文本不会介绍Windows的个性化相关设置。</p>
+
+  </div>
+<h3 id="电源与电池"><a href="#电源与电池" class="headerlink" title="电源与电池"></a>电源与电池</h3><ul>
+<li>电源模式： <strong>高性能</strong> 或 <strong>均衡</strong></li>
+<li>节电模式： <strong>关闭</strong></li>
+</ul>
+<h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h3>
+  <div class="note p-4 mb-4 rounded-small tip">
+    <p>按下 <code>Win</code>+<code>E</code> ，电脑中如果只有一个磁盘则跳过该部分。</p>
+
+  </div>
+<ul>
+<li>高级存储设置→保存新内容的地方（将里面所有的项目均更改到 <code>C:\</code> 并逐个点击 <code>应用</code> 。）</li>
+</ul>
+<h3 id="就近共享"><a href="#就近共享" class="headerlink" title="就近共享"></a>就近共享</h3><ul>
+<li>就近共享：<strong>关闭</strong></li>
+</ul>
+<h3 id="开发者选项"><a href="#开发者选项" class="headerlink" title="开发者选项"></a>开发者选项</h3><ul>
+<li>开发人员模式：<strong>关闭</strong></li>
+</ul>
+<h3 id="剪贴板"><a href="#剪贴板" class="headerlink" title="剪贴板"></a>剪贴板</h3><ul>
+<li>剪贴板历史记录：<strong>开启</strong></li>
+<li>跨设备的剪贴板历史记录：<strong>按需关闭</strong></li>
+</ul>
+<h2 id="游戏"><a href="#游戏" class="headerlink" title="游戏"></a>游戏</h2><h3 id="GameBar"><a href="#GameBar" class="headerlink" title="GameBar"></a>GameBar</h3><ul>
+<li>允许控制器打开GameBar：<strong>按需关闭</strong></li>
+</ul>
+<h3 id="摄像"><a href="#摄像" class="headerlink" title="摄像"></a>摄像</h3><ul>
+<li>录制游戏过程：<strong>关闭</strong></li>
+</ul>
+<h3 id="游戏模式"><a href="#游戏模式" class="headerlink" title="游戏模式"></a>游戏模式</h3><ul>
+<li>游戏模式：<strong>开启</strong></li>
+</ul>
+<h2 id="辅助功能"><a href="#辅助功能" class="headerlink" title="辅助功能"></a>辅助功能</h2><h3 id="键盘"><a href="#键盘" class="headerlink" title="键盘"></a>键盘</h3><ul>
+<li>仅开启 <strong>使用“打印屏幕”键打开屏幕捕获</strong></li>
+</ul>
+<h2 id="隐私和安全性"><a href="#隐私和安全性" class="headerlink" title="隐私和安全性"></a>隐私和安全性</h2><h3 id="常规"><a href="#常规" class="headerlink" title="常规"></a>常规</h3><ul>
+<li><strong>关闭所有选项</strong></li>
+</ul>
+<h3 id="语音"><a href="#语音" class="headerlink" title="语音"></a>语音</h3><ul>
+<li>在线语音识别：<strong>按需关闭</strong></li>
+</ul>
+<h3 id="诊断和反馈"><a href="#诊断和反馈" class="headerlink" title="诊断和反馈"></a>诊断和反馈</h3><ul>
+<li><strong>关闭所有选项</strong></li>
+<li>反馈频率：<strong>从不</strong></li>
+</ul>
+<h3 id="活动历史记录"><a href="#活动历史记录" class="headerlink" title="活动历史记录"></a>活动历史记录</h3><ul>
+<li>在此设备上存储我的活动历史记录：<strong>关闭</strong></li>
+</ul>
+<h3 id="搜索权限"><a href="#搜索权限" class="headerlink" title="搜索权限"></a>搜索权限</h3><ul>
+<li>安全搜索：<strong>关闭</strong></li>
+<li>显示搜索焦点：<strong>关闭</strong></li>
+</ul>
+<h3 id="搜索Windows"><a href="#搜索Windows" class="headerlink" title="搜索Windows"></a>搜索Windows</h3><ul>
+<li>查找我的文件：<strong>增强</strong></li>
+</ul>
+<h2 id="Windows更新"><a href="#Windows更新" class="headerlink" title="Windows更新"></a>Windows更新</h2>
+  <div class="note p-4 mb-4 rounded-small tip">
+    <p>Windows的周期小更新以及补丁更新修复问题与带来新功能的同时可能出现新的bug，如果不介意此问题就跳过此部分。</p>
+
+  </div>
+<ul>
+<li>暂停更新：<strong>暂停5周</strong><br></li>
+</ul>
+<hr>
+<h2 id="安装显卡驱动程序"><a href="#安装显卡驱动程序" class="headerlink" title="安装显卡驱动程序"></a>安装显卡驱动程序</h2>
+  <div class="note p-4 mb-4 rounded-small tip">
+    <p>部分厂商会在出厂时为设备安装较新的显卡驱动程序，如果不确定或不放心也可以跟随以下指引。</p>
+
+  </div>
+<h3 id="Nvidia英伟达®显卡"><a href="#Nvidia英伟达®显卡" class="headerlink" title="Nvidia英伟达®显卡"></a>Nvidia英伟达®显卡</h3><ul>
+<li>Nvidia APP可以更方便地定期更新显卡驱动：<a class="link"   href="https://www.nvidia.cn/software/nvidia-app/" >点击跳转 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+<li>仅下载驱动程序本体（手动驱动搜索）：<a class="link"   href="https://www.nvidia.cn/drivers/lookup/" >点击跳转 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+<h3 id="AMD®显卡"><a href="#AMD®显卡" class="headerlink" title="AMD®显卡"></a>AMD®显卡</h3><ul>
+<li>统一安装与调试软件：<a class="link"   href="https://www.amd.com/zh-cn/support/download/drivers.html" >点击跳转 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+<hr>
+<blockquote>
+<ul>
+<li>安装完成后，重启电脑。</li>
+<li>每个品牌的设备都会预装独立的性能控制软件，搭载独立显卡的机型需在软件内打开<strong>独显直连</strong>开关，在此就不过多赘述。</li>
+</ul>
+</blockquote>
+<hr>
+<h1 id="性能调优"><a href="#性能调优" class="headerlink" title="性能调优"></a>性能调优</h1>
+  <div class="note p-4 mb-4 rounded-small tip">
+    <p>此部分是为了使电脑在游戏时获得更好的性能释放而进行的操作。</p>
+
+  </div>
+<h2 id="Nvidia控制面板设置"><a href="#Nvidia控制面板设置" class="headerlink" title="Nvidia控制面板设置"></a>Nvidia控制面板设置</h2><h3 id="通过预览调整图像设置"><a href="#通过预览调整图像设置" class="headerlink" title="通过预览调整图像设置"></a>通过预览调整图像设置</h3><ul>
+<li>预览：<strong>使用“高级3D图像”设置</strong></li>
+</ul>
+<h3 id="管理3D设置"><a href="#管理3D设置" class="headerlink" title="管理3D设置"></a>管理3D设置</h3><blockquote>
+<ul>
+<li>此处可以点击 <strong>程序设置</strong> 将想要更改的游戏程序添加进来，这样更改的设置只会影响所选程序。</li>
+<li>在此页面上下浏览列表时建议使用右侧滑块控制。</li>
+<li>单个页面更改完成后记得点击右下角 <strong>应用</strong>。</li>
+</ul>
+</blockquote>
+<ul>
+<li>图形增强：<strong>关</strong></li>
+<li>CUDA-GPUs：<strong>全部</strong></li>
+<li>CUDA-系统内存回退政策：<strong>驱动器默认值</strong>（或者按需选择 <strong>偏好无系统内存回退</strong>）</li>
+<li>DSR-因数：<strong>OFF</strong></li>
+<li>DSR-平滑度：<strong>关</strong></li>
+<li>OpenGL GDI 兼容性：<strong>自动</strong></li>
+<li>OpenGL 渲染GPU：<strong>自动选择</strong></li>
+<li>Vulkan&#x2F;OpenGL 现行方法：<strong>自动</strong></li>
+<li>三重缓冲：<strong>关</strong></li>
+<li>低延时模式：<strong>（按需选择）</strong>，游戏内设置需要与此选项一致。</li>
+<li>各向异性过滤：<strong>应用程序控制的</strong></li>
+<li>后台应用程序最大帧速率：<strong>关</strong></li>
+<li>垂直同步：<strong>使用3D应用程序设置</strong></li>
+<li>多帧采样 AA (MFAA)：<strong>关</strong></li>
+<li>平滑处理-FXAA：<strong>关</strong></li>
+<li>平滑处理-模式：<strong>应用程序控制的</strong></li>
+<li>平滑处理-灰度纠正：<strong>开</strong></li>
+<li>平滑处理-设置：<strong>应用程序控制的</strong></li>
+<li>平滑处理-透明度：<strong>关</strong></li>
+<li>最大帧速率：<strong>关</strong></li>
+<li>环境光吸收：<strong>关</strong></li>
+<li>电源管理模式：<strong>最高性能优先</strong></li>
+<li>着色器缓存大小：<strong>驱动程序默认值</strong></li>
+<li>纹理过滤-三线性优化：<strong>开</strong></li>
+<li>纹理过滤-各向异性采样优化：<strong>开</strong></li>
+<li>纹理过滤-负LOD偏移：<strong>允许</strong></li>
+<li>纹理过滤-质量：<strong>高性能</strong></li>
+<li>线程优化：<strong>（建议关闭）</strong></li>
+<li>虚拟现实-可变速率超级取样：<strong>关</strong></li>
+<li>虚拟现实预渲染帧数：<strong>1</strong></li>
+<li>首选刷新率：<strong>最高可用</strong></li>
+</ul>
+<h3 id="配置Surround、PhysX"><a href="#配置Surround、PhysX" class="headerlink" title="配置Surround、PhysX"></a>配置Surround、PhysX</h3><ul>
+<li>PhysX设置→处理器：<strong>（选择以Nvidia开头的选项）</strong></li>
+</ul>
+<h3 id="更改分辨率"><a href="#更改分辨率" class="headerlink" title="更改分辨率"></a>更改分辨率</h3><ul>
+<li>应用以下分辨率→刷新率：<strong>（选择最大的数值）</strong></li>
+<li>应用以下设置：<strong>使用NVIDIA颜色设置</strong></li>
+<li>桌面颜色深度：<strong>（选择最大数值）</strong></li>
+<li>输出颜色深度：<strong>（选择最大数值）</strong></li>
+<li>输出颜色格式：<strong>（按需选择或者RGB）</strong></li>
+<li>输出动态范围：<strong>完全</strong></li>
+</ul>
+<h3 id="调整桌面尺寸与位置"><a href="#调整桌面尺寸与位置" class="headerlink" title="调整桌面尺寸与位置"></a>调整桌面尺寸与位置</h3><ul>
+<li>缩放→选择缩放模式：<strong>（按需设置或者全屏）</strong></li>
+<li>对以下项目执行缩放：<strong>GPU</strong></li>
+<li>覆盖由游戏和程序设置的缩放模式：<strong>✓</strong></li>
+</ul>
+<h3 id="调整视频颜色设置"><a href="#调整视频颜色设置" class="headerlink" title="调整视频颜色设置"></a>调整视频颜色设置</h3><ul>
+<li>您如何进行颜色调整：<strong>通过NVIDIA设置</strong></li>
+<li>高级→动态范围：<strong>完全</strong></li>
+</ul>
+<h3 id="调整视频图像设置"><a href="#调整视频图像设置" class="headerlink" title="调整视频图像设置"></a>调整视频图像设置</h3><ul>
+<li>RTX视频增强：<strong>按需开启</strong>，质量：<strong>自动</strong><br></li>
+</ul>
+<h2 id="AMD显卡设置"><a href="#AMD显卡设置" class="headerlink" title="AMD显卡设置"></a>AMD显卡设置</h2><blockquote>
+<p>敬请期待。</p>
+</blockquote>
+]]></content>
       <tags>
         <tag>技术</tag>
       </tags>
