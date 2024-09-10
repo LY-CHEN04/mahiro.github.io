@@ -182,7 +182,7 @@
 <h2 id="一、处理器整体架构"><a href="#一、处理器整体架构" class="headerlink" title="一、处理器整体架构"></a>一、处理器整体架构</h2><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/images/QSV1.jpg"
+                     data-src="https://i-blog.csdnimg.cn/blog_migrate/860b2c571dade551793e3b816d09ffb2.jpeg"
                      
                 ><br>英特尔的图形处理GPU被称为“核芯显卡”，与CPU集成封装在同一个芯片上，上图展示的是芯片的内部结构。</p>
 <h3 id="1-1-发展"><a href="#1-1-发展" class="headerlink" title="1.1 发展"></a>1.1 发展</h3><p><img  
@@ -330,7 +330,7 @@
   <entry>
     <title>更新日志</title>
     <url>/2023/03/23/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97/</url>
-    <content><![CDATA[<h4 id="站点数据更新日志统一记录页"><a href="#站点数据更新日志统一记录页" class="headerlink" title="站点数据更新日志统一记录页"></a>站点数据更新日志统一记录页</h4><span id="more"></span>
+    <content><![CDATA[<h5 id="欢迎访问什亭之箱"><a href="#欢迎访问什亭之箱" class="headerlink" title="欢迎访问什亭之箱"></a>欢迎访问什亭之箱</h5><span id="more"></span>
 <hr>
 <h1 id="2024年"><a href="#2024年" class="headerlink" title="2024年"></a>2024年</h1><h2 id="9月5日"><a href="#9月5日" class="headerlink" title="9月5日"></a>9月5日</h2><ul>
 <li>优化了一些细节</li>
@@ -422,12 +422,12 @@
   <entry>
     <title>OBS_推流录制工具</title>
     <url>/2024/06/16/OBS-%E6%8E%A8%E6%B5%81%E5%BD%95%E5%88%B6%E5%B7%A5%E5%85%B7/</url>
-    <content><![CDATA[<h4 id="基于OBS-28-0-的基础面板解释。"><a href="#基于OBS-28-0-的基础面板解释。" class="headerlink" title="基于OBS 28.0 的基础面板解释。"></a>基于OBS 28.0 的基础面板解释。</h4><span id="more"></span>
+    <content><![CDATA[<h5 id="基于OBS-28-0-的基础面板解释。"><a href="#基于OBS-28-0-的基础面板解释。" class="headerlink" title="基于OBS 28.0 的基础面板解释。"></a>基于OBS 28.0 的基础面板解释。</h5><span id="more"></span>
 <h1 id="OBS——推流录制工具"><a href="#OBS——推流录制工具" class="headerlink" title="OBS——推流录制工具"></a>OBS——推流录制工具</h1><p><strong>OBS</strong> (Open Broadcaster Software) 是一款开源、免费、跨平台的直播推流和视频录制工具，它功能强大、可调空间大、上限很高，但是因为它主要为直播而设计，录制操作的便利性较差，上手有一定难度。和一众录屏工具（包括N&#x2F;A卡驱动自带录屏）和它的套皮软件相比，OBS 属于那种 <strong>“愿意花一些时间研究能带来更高画质和效率”</strong> 的工具。</p>
 <p>本文将会基于 <code>28.0</code> 版本介绍直播推流和录制相关的设置，并以<strong>CSGO素材录制</strong>为例介绍游戏场景下的设置策略和一些 Trick，注意 OBS 实际分为 Studio 和 Classic 两个版本，Classic 版本有更好的兼容性，对较老的系统和设备有些用处，一般都用 Studio 版本。<br><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/images/OBS0.png"
+                     data-src="https://fastly.jsdelivr.net/gh/Purple-CSGO/img-bed/img/OBS%E5%AE%98%E7%BD%91.png"
                      
                 ></p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>官网：<a class="link"   href="https://obsproject.com/" >https://obsproject.com <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
@@ -441,7 +441,7 @@
 <h2 id="初识OBS"><a href="#初识OBS" class="headerlink" title="初识OBS"></a>初识OBS</h2><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/images/OBS1.png"
+                     data-src="https://fastly.jsdelivr.net/gh/Purple-CSGO/img-bed/img/OBS%E4%B8%BB%E7%95%8C%E9%9D%A2.png"
                      
                 ><br>启动 OBS，忽略首次引导，主界面如图所示。可以看到界面分为以下几个部分：</p>
 <ul>
@@ -461,7 +461,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/images/OBS2.png"
+                     data-src="https://fastly.jsdelivr.net/gh/Purple-CSGO/img-bed/img/OBS%E6%9D%A5%E6%BA%90.png"
                      
                 ></p>
 <h3 id="混音器面板"><a href="#混音器面板" class="headerlink" title="混音器面板"></a>混音器面板</h3><p>这里我们可以调整各个声音来源的音量和滤镜，改变它们的混合比例。打开某个音源的滤镜页，可以添加 <code>降噪、阈值</code> 等滤镜，包括电脑中已安装的VST效果，图中简单加了一个 <code>噪音抑制</code>，效果尚可。</p>
@@ -469,7 +469,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/images/OBS3.png"
+                     data-src="https://fastly.jsdelivr.net/gh/Purple-CSGO/img-bed/img/OBS%E9%AB%98%E7%BA%A7%E9%9F%B3%E9%A2%91%E5%B1%9E%E6%80%A7.png"
                      
                 ></p>
 <h3 id="场景面板"><a href="#场景面板" class="headerlink" title="场景面板"></a>场景面板</h3><p>设置和调整各个场景（Scene），直播往往需要多个不同场景，如正式开播前的等候场景、游戏A、B、C的场景、聊天场景等等。提前设置好各个场景可以避免来源面板臃肿和不断开关来源的麻烦。搭配相应的工具（如StreamDeck）可以实现快速切换场景，给直播带来便利。</p>
@@ -494,7 +494,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/images/OBS4.png"
+                     data-src="https://fastly.jsdelivr.net/gh/Purple-CSGO/img-bed/img/OBS%E9%AB%98%E7%BA%A7%E9%A1%B5.png"
                      
                 ></p>
 <h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p>输出页包含推流、录像、音频和回放缓存（即时重放）的设置，也是OBS设置的难点。</p>
@@ -502,7 +502,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/images/OBS5.png"
+                     data-src="https://fastly.jsdelivr.net/gh/Purple-CSGO/img-bed/img/OBS%E4%B8%B2%E6%B5%81%E7%95%8C%E9%9D%A2.png"
                      
                 ></p>
 <h4 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a>编码器</h4><p>编码器是OBS设置的重点。其中 x264 是 CPU 软件编码，比较吃CPU的性能和多核性能，而显卡编码一般对性能影响较小，但是画质较差，NVIDIA显卡有 NVENC，AMD显卡有 AMF，Intel显卡有 QuickSync，Mac下也有对应的编码器。</p>
@@ -543,7 +543,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/images/OBS6.png"
+                     data-src="https://fastly.jsdelivr.net/gh/Purple-CSGO/img-bed/img/OBS%E5%BD%95%E5%83%8F%E8%AE%BE%E7%BD%AE.png"
                      
                 ></p>
 <h4 id="音频"><a href="#音频" class="headerlink" title="音频"></a>音频</h4><p>这里可以设置更高的比特率&#x2F;码率&#x2F;位率，提高声音质量，也可以给不同的轨道起名字方便后期区分。</p>
@@ -570,7 +570,12 @@
 <li>受<strong>CSGO受信任模式</strong>的影响，官方匹配&#x2F;直接启动游戏时无法捕获游戏流，只能捕获显示器，性能较差；平台游戏不受影响。</li>
 <li>针对本地回放录像 demo 录屏有两种解决方法：<ol>
 <li>启动项添加 <code>-allow_third_party_software</code></li>
-<li>使用 <a class="link"   href="https://advancedfx.org/" >HLAE <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>启动 CSGO</li>
+<li>使用 <a class="link"   href="https://advancedfx.org/" >HLAE <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>启动 CSGO<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://fastly.jsdelivr.net/gh/Purple-CSGO/img-bed/img/OBS%E6%BA%90%E5%B1%9E%E6%80%A7.png"
+                     
+                ></li>
 </ol>
 </li>
 </ul>
@@ -609,7 +614,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="/images/OBS8.png"
+                     data-src="https://fastly.jsdelivr.net/gh/Purple-CSGO/img-bed/img/OBS%E7%BB%9F%E8%AE%A1%E9%9D%A2%E6%9D%BF.png"
                      
                 ></p>
 ]]></content>
@@ -620,7 +625,9 @@
   <entry>
     <title>Windows11系统初步设置与基础调试</title>
     <url>/2024/09/05/Windows11%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E8%B0%83%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="引入与准备阶段"><a href="#引入与准备阶段" class="headerlink" title="引入与准备阶段"></a>引入与准备阶段</h1><details class="orange" data-header-exclude><summary><i class="fa-solid fa-chevron-right"></i>购买阶段 </summary>
+    <content><![CDATA[<h5 id="从电脑选购到系统配置"><a href="#从电脑选购到系统配置" class="headerlink" title="从电脑选购到系统配置"></a>从电脑选购到系统配置</h5><span id="more"></span>
+
+<h1 id="引入与准备阶段"><a href="#引入与准备阶段" class="headerlink" title="引入与准备阶段"></a>引入与准备阶段</h1><details class="orange" data-header-exclude><summary><i class="fa-solid fa-chevron-right"></i>购买阶段 </summary>
               <div class='content'>
               <p><strong>购入的渠道决定面临风险的程度，不要为了便宜去趟瑕疵重灾区的浑水。</strong><br><strong>如果购买渠道为“建议”中的选项，可以跳过该部分，前往<a href="https://ly-chen04.github.io/2024/09/05/Windows11%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E8%B0%83%E8%AF%95/#Windows11%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5%E8%AE%BE%E7%BD%AE">Windows11系统初步设置</a>。</strong><br><br></p><blockquote><p>建议：京东、天猫官网旗舰店、官方网站商城<br>不建议：所有第三方店铺、拼多多、抖音直播间</p></blockquote><ul><li>建议小白在购买之前和店铺客服确认产品配置与机器封装情况并保存聊天记录后再下单，有助于维护自身权益。</li><li>官方的硬盘或内存定制机型99%是拆封过的，不建议购买，不如自己后期加装硬盘。</li><li>要求卖家使用京东与顺丰快递（大不了就加钱），这两家的时效性很好也可以送货上门，不怎么会出现暴力运输的情况。</li><li>大多笔记本外包装上的封条经过特殊设计，撕下会留有特定印记，封条有问题直接退货。</li><li>不放心的也可以录制一个开箱视频，视频中要展示快递单号与包装全貌。</li></ul>
               </div>
