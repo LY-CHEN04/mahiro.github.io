@@ -1,0 +1,60 @@
+/* styles.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #faf8ef;
+    font-family: Misans, sans-serif;
+}
+
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.score-container {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #776e65;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    gap: 10px;
+    background-color: #bbada0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #cdc1b4;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #776e65;
+}
+
+.cell-2 { background-color: #eee4da; }
+.cell-4 { background-color: #ede0c8; }
+.cell-8 { background-color: #f2b179; color: #f9f6f2; }
+.cell-16 { background-color: #f59563; color: #f9f6f2; }
+.cell-32 { background-color: #f67c5f; color: #f9f6f2; }
+.cell-64 { background-color: #f65e3b; color: #f9f6f2; }
+.cell-128 { background-color: #edcf72; color: #f9f6f2; }
+.cell-256 { background-color: #edcc61; color: #f9f6f2; }
+.cell-512 { background-color: #edc850; color: #f9f6f2; }
+.cell-1024 { background-color: #edc53f; color: #f9f6f2; }
+.cell-2048 { background-color: #edc22e; color: #f9f6f2; }
+
