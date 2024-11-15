@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多引擎搜索</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/gh/xiaomi-fonts/MiSans@1.0/MiSans-Regular.ttf" as="font" type="font/ttf" crossorigin>
+    <style>
+        @font-face {
+            font-family: 'MiSans';
+            src: url('https://cdn.jsdelivr.net/gh/xiaomi-fonts/MiSans@1.0/MiSans-Regular.ttf') format('truetype');
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'MiSans', sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffffff;
+            transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #location-info {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            font-size: 20px;
+            color: #333;
+            z-index: 1000;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            line-height: 1.8;
+        }
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 180px;
+            transform-style: preserve-3d;
+            perspective: 1500px;
+        }
+        #mainLogo {
+            width: 350px;
+            height: auto;
+            margin-bottom: 40px;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        #mainLogo:hover {
+            transform: scale(1.15) rotate(8deg) translateY(-10px);
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            width: 750px;
+            max-width: 90vw;
+            position: relative;
+            margin-top: 30px;
+        }
+        .engine-selector {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: white;
+            padding: 5px;
+        }
+        .engine-selector:hover {
+            transform: scale(1.2) rotate(15deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        .engine-selector img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .engine-selector:hover img {
+            transform: scale(1.1);
+        }
+        #searchInput {
+            flex: 1;
+            height: 55px;
+            padding: 0 25px;
+            font-size: 20px;
+            border: 3px solid transparent;
+            border-radius: 28px;
+            outline: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        @keyframes borderAnimation {
+            0% { border-color: #ff0000; filter: drop-shadow(0 0 15px rgba(255,0,0,0.5)); }
+            20% { border-color: #ff8800; filter: drop-shadow(0 0 15px rgba(255,136,0,0.5)); }
+            40% { border-color: #ffff00; filter: drop-shadow(0 0 15px rgba(255,255,0,0.5)); }
+            60% { border-color: #00ff00; filter: drop-shadow(0 0 15px rgba(0,255,0,0.5)); }
+            80% { border-color: #0000ff; filter: drop-shadow(0 0 15px rgba(0,0,255,0.5)); }
+            100% { border-color: #ff00ff; filter: drop-shadow(0 0 15px rgba(255,0,255,0.5)); }
+        }
+        #searchInput:focus {
+            animation: borderAnimation 4s linear infinite;
+            border-width: 4px;
+        }
+        .engine-options {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            overflow: hidden;
+            min-width: 250px;
+            transform-origin: top left;
+            animation: showMenu 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes showMenu {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .engine-option {
+            display: flex;
+            align-items: center;
+            padding: 16px 25px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-size: 18px;
+            background: white;
+        }
+        .engine-option img {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .engine-option:hover {
+            background-color: #f5f5f5;
+            transform: scale(1.05) translateX(10px);
+        }
+        .engine-option:hover img {
+            transform: scale(1.2) rotate(10deg);
+        }
+        .notification {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            padding: 15px 30px;
+            background: rgba(0,0,0,0.85);
+            color: white;
+            border-radius: 25px;
+            font-size: 18px;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        .notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .copyright {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            font-size: 16px;
+            color: #666;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) {
+            .main-container {
+                margin-top: 120px;
+            }
+            #mainLogo {
+                width: 250px;
+                height: auto;
+                object-fit: contain;
+            }
+            .search-container {
+                width: 90vw;
+            }
+            #searchInput {
+                font-size: 18px;
+                height: 50px;
+            }
+            #location-info {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="location-info">
+        <div id="ip">IP: 正在获取...</div>
+        <div id="location">位置: 正在获取...</div>
+        <div id="system-time">用户系统时间: 加载中...</div>
+    </div>
+    <div class="main-container">
+        <img  id="mainLogo" 
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                      alt="搜索引擎Logo"
+                >
+        <div class="search-container">
+            <div class="engine-selector">
+                <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                      alt="Google"
+                >
+            </div>
+            <input type="text" id="searchInput" placeholder="请输入搜索内容...">
+            <div class="engine-options">
+                <div class="engine-option" data-engine="google">
+                    <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
+                      alt="Google"
+                >
+                    <span>Google 搜索</span>
+                </div>
+                <div class="engine-option" data-engine="bing">
+                    <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/microsoft/BingHomepage@main/images/bing_logo.svg"
+                      alt="Bing"
+                >
+                    <span>必应搜索</span>
+                </div>
+                <div class="engine-option" data-engine="duckduckgo">
+                    <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://duckduckgo.com/assets/icons/meta/DDG-icon_256x256.png"
+                      alt="DuckDuckGo"
+                >
+                    <span>DuckDuckGo</span>
+                </div>
+                <div class="engine-option" data-engine="baidu">
+                    <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png"
+                      alt="百度"
+                >
+                    <span>百度搜索</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="notification"></div>
+    <div class="copyright">© 2022-2024 L.Y Chen</div>
+    <script>
+        // 获取IP和地理位置信息
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ip').textContent = 'IP: ' + data.ip;
+                return fetch(`https://ipapi.co/${data.ip}/json/`);
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('location').textContent = `位置: ${data.country_name_chinese || data.country_name} ${data.region || ''} ${data.city || ''}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('location').textContent = '位置: 无法获取位置信息';
+            });
+        // 更新系统时间
+        function updateSystemTime() {
+            const now = new Date();
+            document.getElementById('system-time').textContent = '用户系统时间: ' + now.toLocaleString('zh-CN', {
+                hour12: false,
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        }
+        setInterval(updateSystemTime, 1000);
+        updateSystemTime();
+        // 搜索引擎切换逻辑
+        const engineSelector = document.querySelector('.engine-selector');
+        const engineOptions = document.querySelector('.engine-options');
+        const mainLogo = document.getElementById('mainLogo');
+        const searchInput = document.getElementById('searchInput');
+        const notification = document.querySelector('.notification');
+        let currentEngine = 'google';
+        const engineData = {
+            google: {
+                logo: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+                searchUrl: 'https://www.google.com/search?q=',
+                bgColor: '#ffffff',
+                name: 'Google 搜索'
+            },
+            bing: {
+                logo: 'https://cdn.jsdelivr.net/gh/microsoft/BingHomepage@main/images/bing_logo.svg',
+                searchUrl: 'https://www.bing.com/search?q=',
+                bgColor: '#f5f5f5',
+                name: '必应搜索'
+            },
+            duckduckgo: {
+                logo: 'https://duckduckgo.com/assets/icons/meta/DDG-icon_256x256.png',
+                searchUrl: 'https://duckduckgo.com/?q=',
+                bgColor: '#f7f7f7',
+                name: 'DuckDuckGo 搜索'
+            },
+            baidu: {
+                logo: 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png',
+                searchUrl: 'https://www.baidu.com/s?wd=',
+                bgColor: '#f5f5f5',
+                name: '百度搜索'
+            }
+        };
+        engineSelector.addEventListener('click', (e) => {
+            e.stopPropagation();
+            engineOptions.style.display = engineOptions.style.display === 'none' ? 'block' : 'none';
+            if(engineOptions.style.display === 'block') {
+                engineSelector.style.transform = 'scale(1.1) rotate(-15deg)';
+            } else {
+                engineSelector.style.transform = 'scale(1) rotate(0)';
+            }
+        });
+        document.addEventListener('click', (e) => {
+            if (!engineSelector.contains(e.target) && !engineOptions.contains(e.target)) {
+                engineOptions.style.display = 'none';
+                engineSelector.style.transform = 'scale(1) rotate(0)';
+            }
+        });
+        document.querySelectorAll('.engine-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const engine = option.dataset.engine;
+                currentEngine = engine;
+                // 添加过渡动画
+                mainLogo.style.transform = 'scale(0.8) rotate(-10deg)';
+                mainLogo.style.opacity = '0';
+                setTimeout(() => {
+                    mainLogo.src = engineData[engine].logo;
+                    mainLogo.style.transform = 'scale(1.2) rotate(10deg)';
+                    mainLogo.style.opacity = '1';
+                    setTimeout(() => {
+                        mainLogo.style.transform = 'scale(1) rotate(0)';
+                    }, 200);
+                }, 200);
+                engineSelector.querySelector('img').src = engineData[engine].logo;
+                document.body.style.backgroundColor = engineData[engine].bgColor;
+                engineOptions.style.display = 'none';
+                // 显示通知
+                notification.textContent = `已切换至${engineData[engine].name}`;
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        });
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && searchInput.value.trim()) {
+                window.location.href = engineData[currentEngine].searchUrl + encodeURIComponent(searchInput.value);
+            }
+        });
+    </script>
+</body>
+</html>
